@@ -1,0 +1,2 @@
+hibernate:
+  allow_update_outside_transaction: true
