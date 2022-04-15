@@ -1,7 +1,10 @@
 package controller;
 
 import model.AcademicStaff;
+import model.Student;
 import service.LoginService;
+import service.StudentService;
+import utils.PasswordUtils;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -16,6 +19,10 @@ public class Login extends JFrame {
     private JButton btnNewButton;
     private JLabel label;
     private JPanel contentPane;
+    private JRadioButton radioStudent;
+    private JRadioButton radioStaff;
+    private LoginService loginService = new LoginService();
+    private StudentService studentService = new StudentService();
 
     /**
      * Launch the application.
@@ -72,25 +79,64 @@ public class Login extends JFrame {
         contentPane.add(lblPassword);
         btnNewButton = new JButton("Login");
         btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 26));
-        btnNewButton.setBounds(545, 392, 162, 73);
+        btnNewButton.setBounds(545, 420, 162, 73);
+
+        radioStudent = new JRadioButton("Student", true);
+        radioStaff = new JRadioButton("Academic Staff");
+        radioStaff.setFont(new Font("Tahoma", Font.PLAIN, 26));
+        radioStudent.setFont(new Font("Tahoma", Font.PLAIN, 26));
+        radioStudent.setBounds(400,360,200,50);
+        radioStaff.setBounds(600,360,200,50);
+        ButtonGroup bg=new ButtonGroup();
+        bg.add(radioStaff);bg.add(radioStudent);
+        contentPane.add(radioStudent);
+        contentPane.add(radioStaff);
+
+
         btnNewButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String userName = textField.getText();
                 String password = passwordField.getText();
 
-                LoginService loginService = new LoginService();
-                AcademicStaff academicStaff = new AcademicStaff();
-                academicStaff.setUsername(userName);
-                academicStaff.setPassword(password);
-                boolean isLogin = loginService.academicStaffLogin(academicStaff);
+                boolean isLogin = false;
+
+                if(radioStudent.isSelected()){
+                    Student student = new Student()
+                    .setMssv(userName)
+                    .setPassword(password);
+                    isLogin = loginService.studentLogin(student);
+
+                }else{
+                    AcademicStaff academicStaff = new AcademicStaff();
+                    academicStaff.setUsername(userName);
+                    academicStaff.setPassword(password);
+                    isLogin = loginService.academicStaffLogin(academicStaff);
+                }
 
                 if (isLogin) {
                     dispose();
-                    UserHome ah = new UserHome(userName);
+                    if(radioStudent.isSelected()){
+                        Student student = studentService.getByMssv(userName);
+                        if(PasswordUtils.passwordEncoder.matches(userName, student.getPassword())){
+                            ChangePasswordDefault changePasswordDefault = new ChangePasswordDefault(userName);
+                            changePasswordDefault.setVisible(true);
+                        }else {
+                            StudentHome studentHome = new StudentHome(userName);
+                            studentHome.setVisible(true);
+                        }
+                    }else {
+                        AcademicStaffHome academicStaffHome = new AcademicStaffHome(userName);
+                        academicStaffHome.setVisible(true);
+                    }
+                    JOptionPane.showMessageDialog(btnNewButton, "Ban da dang nhap thanh cong");
+                }else if(isLogin && radioStudent.isSelected() && userName.equals(password)){
+                    dispose();
+                    AcademicStaffHome ah = new AcademicStaffHome(userName);
                     ah.setTitle("Chao mung");
                     ah.setVisible(true);
                     JOptionPane.showMessageDialog(btnNewButton, "Ban da dang nhap thanh cong");
-                } else {
+                }
+                else {
                     JOptionPane.showMessageDialog(btnNewButton, "User hoac password sai!");
                 }
             }

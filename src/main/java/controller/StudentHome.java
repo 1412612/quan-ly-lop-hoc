@@ -6,21 +6,22 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class UserHome extends JFrame {
+public class StudentHome extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
 
-    public UserHome() {
+    public StudentHome() {
 
     }
 
     /**
      * Create the frame.
      */
-    public UserHome(final String userSes) {
+    public StudentHome(final String userSes) {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setTitle("Trang chủ sinh viên");
         setBounds(450, 190, 1014, 597);
         setResizable(false);
         contentPane = new JPanel();
@@ -65,3 +66,4 @@ public class UserHome extends JFrame {
         contentPane.add(button);
     }
 }
+

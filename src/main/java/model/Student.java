@@ -1,12 +1,14 @@
 package model;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "student")
 @Data
+@Accessors(chain = true)
 public class Student {
     @Id
     @Column(name = "mssv", nullable = false)
@@ -14,9 +16,6 @@ public class Student {
 
     @Column(name = "name", nullable = false)
     private String name;
-
-    @Column(name = "username", nullable = false)
-    private String username;
 
     @Column(name = "password", nullable = false)
     private String password;

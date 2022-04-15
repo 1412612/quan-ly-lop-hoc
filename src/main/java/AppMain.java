@@ -40,13 +40,15 @@ public class AppMain {
 //        }
         //Command.addAcademicStaff("thanh", "admin");
 
-        LoginService loginService = new LoginService();
+//        LoginService loginService = new LoginService();
+//
+//        AcademicStaff academicStaff = new AcademicStaff();
+//
+//        academicStaff.setUsername("admin");
+//        academicStaff.setPassword("admin");
+//
+//        System.out.println(loginService.academicStaffLogin(academicStaff));
 
-        AcademicStaff academicStaff = new AcademicStaff();
-
-        academicStaff.setUsername("admin");
-        academicStaff.setPassword("admin");
-
-        System.out.println(loginService.academicStaffLogin(academicStaff));
+        Command.addStudent("SV0001", "SV0001", "Nguyễn Văn Thanh");
     }
 }
