@@ -11,58 +11,89 @@ public class AcademicStaffHome extends JFrame {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
 
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    AcademicStaffHome frame = new AcademicStaffHome("admin");
+                    frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
     public AcademicStaffHome() {
 
     }
 
-    /**
-     * Create the frame.
-     */
-    public AcademicStaffHome(final String userSes) {
+    public AcademicStaffHome(final String username) {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Trang chủ giáo vụ");
-        setBounds(450, 190, 1014, 597);
+        setBounds(450, 190, 1000, 600);
         setResizable(false);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
-        final JButton btnNewButton = new JButton("Logout");
-        btnNewButton.setForeground(new Color(0, 0, 0));
-        btnNewButton.setBackground(UIManager.getColor("Button.disabledForeground"));
-        btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 39));
-        btnNewButton.addActionListener(new ActionListener() {
+
+        JPanel menuPanel = new JPanel();
+        menuPanel.setBackground(Color.GRAY);
+        menuPanel.setLayout(null);
+        menuPanel.setBounds(0, 0, 200, 600);
+        contentPane.add(menuPanel);
+
+        Button subjectManagementButton = new Button("Quản lý lớp học");
+        subjectManagementButton.setBounds(10, 10 ,170, 50);
+        subjectManagementButton.setForeground(new Color(0, 0, 0));
+        subjectManagementButton.setBackground(UIManager.getColor("Button.disabledForeground"));
+        subjectManagementButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
+        subjectManagementButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                int a = JOptionPane.showConfirmDialog(btnNewButton, "Are you sure?");
-                if (a == JOptionPane.YES_OPTION) {
-                    dispose();
-                    Login obj = new Login();
-                    obj.setTitle("Student-Login");
-                    obj.setVisible(true);
-                }
+
+            }
+        });
+
+        Button studentManagementButton = new Button("Quản lý sinh viên");
+        studentManagementButton.setBounds(10, 110 ,170, 50);
+        studentManagementButton.setForeground(new Color(0, 0, 0));
+        studentManagementButton.setBackground(UIManager.getColor("Button.disabledForeground"));
+        studentManagementButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
+        studentManagementButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+        Button roomManagementButton = new Button("Quản lý phòng học");
+        roomManagementButton.setBounds(10, 210 ,170, 50);
+        roomManagementButton.setForeground(new Color(0, 0, 0));
+        roomManagementButton.setBackground(UIManager.getColor("Button.disabledForeground"));
+        roomManagementButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
+        roomManagementButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+        Button accountManagementButton = new Button("Quản lý tài khoản");
+        accountManagementButton.setBounds(10, 310 ,170, 50);
+        accountManagementButton.setForeground(new Color(0, 0, 0));
+        accountManagementButton.setBackground(UIManager.getColor("Button.disabledForeground"));
+        accountManagementButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
+        accountManagementButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                AccountAcademicStaff accountAcademicStaff = new AccountAcademicStaff(username);
+                accountAcademicStaff.setVisible(true);
                 dispose();
-                Login obj = new Login();
-
-                obj.setTitle("Student-Login");
-                obj.setVisible(true);
-
             }
         });
-        btnNewButton.setBounds(247, 118, 491, 114);
-        contentPane.add(btnNewButton);
-        JButton button = new JButton("Change-password\r\n");
-        button.setBackground(UIManager.getColor("Button.disabledForeground"));
-        button.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-                ChangePassword bo = new ChangePassword(userSes);
-                bo.setTitle("Change Password");
-                bo.setVisible(true);
 
-            }
-        });
-        button.setFont(new Font("Tahoma", Font.PLAIN, 35));
-        button.setBounds(247, 320, 491, 114);
-        contentPane.add(button);
+        menuPanel.add(subjectManagementButton);
+        menuPanel.add(studentManagementButton);
+        menuPanel.add(roomManagementButton);
+        menuPanel.add(accountManagementButton);
     }
 }

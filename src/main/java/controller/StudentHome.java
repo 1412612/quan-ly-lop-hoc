@@ -55,7 +55,7 @@ public class StudentHome extends JFrame {
         button.setBackground(UIManager.getColor("Button.disabledForeground"));
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                ChangePassword bo = new ChangePassword(userSes);
+                AcademicStaffChangePassword bo = new AcademicStaffChangePassword(userSes);
                 bo.setTitle("Change Password");
                 bo.setVisible(true);
 

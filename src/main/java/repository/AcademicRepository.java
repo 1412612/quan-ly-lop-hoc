@@ -1,6 +1,7 @@
 package repository;
 
 import model.AcademicStaff;
+import model.Student;
 import org.apache.commons.lang3.ObjectUtils;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -30,5 +31,13 @@ public class AcademicRepository {
             return results.get(0);
         }
         return null;
+    }
+
+    public void update(AcademicStaff academicStaff){
+        SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
+        Session session = sessionFactory.openSession();
+        session.update(academicStaff);
+        session.flush();
+        session.close();
     }
 }
