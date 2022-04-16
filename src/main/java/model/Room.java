@@ -1,12 +1,14 @@
 package model;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 
 @Data
 @Entity
 @Table(name = "room")
+@Accessors(chain = true)
 public class Room {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
