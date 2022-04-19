@@ -16,7 +16,6 @@ public class StudentSubject {
     @Column(name = "mssv", nullable = false)
     private String mssv;
 
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "subject_code", referencedColumnName = "code")
     private Subject subject;
@@ -66,5 +65,4 @@ public class StudentSubject {
 
     @Column(name = "session_fifteen", nullable = false)
     private boolean sessionFifteen;
-
 }

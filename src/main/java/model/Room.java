@@ -11,10 +11,16 @@ import javax.persistence.*;
 @Accessors(chain = true)
 public class Room {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    //@GeneratedValue(strategy= GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private int id;
 
+
+    @Column(name = "code", nullable = false)
+    private String code;
+
     @Column(name = "name", nullable = false)
     private String name;
+
+
 }

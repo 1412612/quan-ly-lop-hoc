@@ -1,6 +1,8 @@
 package controller;
 
+import model.AcademicStaff;
 import model.Room;
+import service.AcademicStaffService;
 import service.RoomService;
 
 import javax.swing.*;
@@ -16,6 +18,8 @@ public class AcademicStaffHome extends JFrame {
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
     private RoomService roomService = new RoomService();
+    private AcademicStaff academicStaff;
+    private AcademicStaffService academicStaffService = new AcademicStaffService();
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -35,6 +39,7 @@ public class AcademicStaffHome extends JFrame {
     }
 
     public AcademicStaffHome(final String username) {
+        academicStaff = academicStaffService.getByUsername(username);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Trang chủ giáo vụ");
@@ -45,25 +50,27 @@ public class AcademicStaffHome extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        List<Room> list = new ArrayList<>();
-        list.add(new Room().setId(1).setName("TC201"));
-        list.add(new Room().setId(2).setName("TC202"));
+        JLabel infoLabel = new JLabel("Thông tin:");
+        infoLabel.setBackground(Color.BLACK);
+        infoLabel.setForeground(Color.BLACK);
+        infoLabel.setFont(new Font("Tahoma", Font.PLAIN, 26));
+        infoLabel.setBounds(300, 50, 200, 50);
+        contentPane.add(infoLabel);
 
-        String data[][] = new String[list.size()][];
+        JLabel usernameLabel = new JLabel("Tài khoản: "+ academicStaff.getUsername());
+        usernameLabel.setBackground(Color.BLACK);
+        usernameLabel.setForeground(Color.BLACK);
+        usernameLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
+        usernameLabel.setBounds(300, 100, 200, 100);
+        contentPane.add(usernameLabel);
 
-        for (int i = 0; i < list.size(); i++) {
-            data[i] = convertObjectToStr(list.get(i));
-        }
-
-        String column[] = {"ID", "NAME"};
-
-        JTable jt = new JTable(data, column);
-        jt.setBounds(200, 50, 800, 600);
-
-        JScrollPane sp = new JScrollPane(jt);
-        sp.setBounds(200, 0, 800, 600);
-        contentPane.add(sp);
-
+        JLabel nameLabel = new JLabel("Tên hiển thị: "+ academicStaff.getName());
+        nameLabel.setBackground(Color.BLACK);
+        nameLabel.setForeground(Color.BLACK);
+        nameLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
+        nameLabel.setBounds(300, 150, 500, 100);
+        contentPane.add(nameLabel);
+        
         JPanel menuPanel = new JPanel();
         menuPanel.setBackground(Color.GRAY);
         menuPanel.setLayout(null);
@@ -99,7 +106,9 @@ public class AcademicStaffHome extends JFrame {
         roomManagementButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
         roomManagementButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
+                RoomManager roomManager = new RoomManager(username);
+                roomManager.setVisible(true);
+                dispose();
             }
         });
 
@@ -122,15 +131,11 @@ public class AcademicStaffHome extends JFrame {
         menuPanel.add(accountManagementButton);
     }
 
-    JScrollPane getScrollPaneRoom(List<Room> roomList) {
-        List<Room> list = new ArrayList<>();
-        list.add(new Room().setId(1).setName("TC201"));
-        list.add(new Room().setId(2).setName("TC202"));
-
+    JScrollPane getScrollPaneRoom(List<Room> list) {
         String data[][] = new String[list.size()][];
 
         for (int i = 0; i < list.size(); i++) {
-            data[i] = convertObjectToStr(list.get(i));
+            data[i] = convertRoomToStrArr(list.get(i));
         }
 
         String column[] = {"ID", "NAME"};
@@ -142,7 +147,7 @@ public class AcademicStaffHome extends JFrame {
         return sp;
     }
 
-    String[] convertObjectToStr(Room room) {
+    String[] convertRoomToStrArr(Room room) {
         String[] results = new String[2];
         results[0] = String.valueOf(room.getId());
         results[1] = room.getName();
@@ -151,10 +156,33 @@ public class AcademicStaffHome extends JFrame {
 
     JPanel getRoomManagerPanel(){
         JPanel mainPanel = new JPanel();
-
-        JLabel headerLabel = new JLabel("Quản lý phòng học");
-        JLabel contentLabel = new JLabel("Danh sách phòng học");
-
         List<Room> roomList = roomService.getAllRoom();
+
+        JLabel contentLabel = new JLabel("Danh sách phòng học");
+        contentLabel.setBackground(Color.BLACK);
+        contentLabel.setForeground(Color.BLACK);
+        contentLabel.setFont(new Font("Tahoma", Font.PLAIN, 26));
+        contentLabel.setBounds(300, 100, 200, 50);
+        mainPanel.add(contentLabel);
+
+        JLabel headerLabel = new JLabel("Quản lý phòng học:");
+        headerLabel.setBackground(Color.BLACK);
+        headerLabel.setForeground(Color.BLACK);
+        headerLabel.setFont(new Font("Tahoma", Font.PLAIN, 26));
+        headerLabel.setBounds(300, 50, 200, 50);
+        mainPanel.add(headerLabel);
+
+        JScrollPane jScrollPane = getScrollPaneRoom(roomList);
+        jScrollPane.setBounds(0, 150, 800, 400);
+
+        mainPanel.add(jScrollPane);
+
+        mainPanel.setBounds(200, 0, 800, 600);
+
+
+
+
+
+        return mainPanel;
     }
 }

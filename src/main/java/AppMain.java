@@ -49,6 +49,7 @@ public class AppMain {
 //
 //        System.out.println(loginService.academicStaffLogin(academicStaff));
 
-        Command.addStudent("SV0001", "SV0001", "Nguyễn Văn Thanh");
+        //Command.addStudent("SV0001", "SV0001", "Nguyễn Văn Thanh");
+        Command.addAcademicStaff("admin", "admin");
     }
 }
