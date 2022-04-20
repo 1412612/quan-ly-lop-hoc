@@ -11,6 +11,9 @@ import javax.persistence.*;
 @Accessors(chain = true)
 public class Student {
     @Id
+    @Column(name = "id", nullable = false)
+    private int id;
+
     @Column(name = "mssv", nullable = false)
     private String mssv;
 

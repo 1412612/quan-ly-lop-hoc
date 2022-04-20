@@ -95,7 +95,9 @@ public class AcademicStaffHome extends JFrame {
         studentManagementButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
         studentManagementButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
+                StudentManager manager = new StudentManager(username);
+                manager.setVisible(true);
+                dispose();
             }
         });
 

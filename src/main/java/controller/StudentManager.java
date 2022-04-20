@@ -4,9 +4,10 @@ package controller;
 import data.DataModel;
 import model.AcademicStaff;
 import model.Room;
+import model.Student;
 import org.apache.commons.lang3.ObjectUtils;
 import service.AcademicStaffService;
-import service.RoomService;
+import service.StudentService;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -20,10 +21,10 @@ public class StudentManager extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
-    private RoomService roomService = new RoomService();
+    private StudentService studentService = new StudentService();
     private AcademicStaff academicStaff;
     private AcademicStaffService academicStaffService = new AcademicStaffService();
-    int lastRoomId = 0;
+    int lastStudentId = 0;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -54,19 +55,19 @@ public class StudentManager extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        List<Room> roomList = roomService.getAllRoom();
+        List<Student> studentList = studentService.getAllStudent();
 
-        if (ObjectUtils.isNotEmpty(roomList))
-            lastRoomId = roomList.get(roomList.size() - 1).getId();
+        if (ObjectUtils.isNotEmpty(studentList))
+            lastStudentId = studentList.get(studentList.size() - 1).getId();
 
-        JLabel headerLabel = new JLabel("Quản lý phòng học:");
+        JLabel headerLabel = new JLabel("Quản lý Sinh viên:");
         headerLabel.setBackground(Color.BLACK);
         headerLabel.setForeground(Color.BLACK);
         headerLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
         headerLabel.setBounds(100, 0, 800, 50);
         contentPane.add(headerLabel);
 
-        JLabel contentLabel = new JLabel("Danh sách phòng học");
+        JLabel contentLabel = new JLabel("Danh sách sinh viên");
         contentLabel.setBackground(Color.BLACK);
         contentLabel.setForeground(Color.BLACK);
         contentLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -74,7 +75,7 @@ public class StudentManager extends JFrame {
         contentPane.add(contentLabel);
 
 
-        DataModel model = getDefaultTableModelRoom(roomList);
+        DataModel model = getDefaultTableModelObj(studentList);
         JTable jt = new JTable(model);
         jt.setRowHeight(20);
         jt.getTableHeader().setBackground(new Color(255, 128, 0));
@@ -98,12 +99,12 @@ public class StudentManager extends JFrame {
                 if (jt.getSelectedRow() != -1) {
                     int a = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xóa phòng học này?");
                     if (a == JOptionPane.YES_OPTION) {
-                        Room entity = new Room()
+                        Student entity = new Student()
                                 .setId(Integer.valueOf(String.valueOf(jt.getValueAt(jt.getSelectedRow(), 0))))
-                                .setCode(String.valueOf(jt.getValueAt(jt.getSelectedRow(), 1)))
+                                .setMssv(String.valueOf(jt.getValueAt(jt.getSelectedRow(), 1)))
                                 .setName(String.valueOf(jt.getValueAt(jt.getSelectedRow(), 2)));
 
-                        roomService.delete(entity);
+                        studentService.delete(entity);
                         model.removeRow(jt.getSelectedRow());
                     }
                 }
@@ -135,7 +136,7 @@ public class StudentManager extends JFrame {
         addButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
         addButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                JTextField text1 = new JTextField(String.valueOf(++lastRoomId));
+                JTextField text1 = new JTextField(String.valueOf(++lastStudentId));
                 text1.setFont(new Font("Tahoma", Font.PLAIN, 20));
                 JTextField text2 = new JTextField();
                 text2.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -166,8 +167,8 @@ public class StudentManager extends JFrame {
         updateButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
         updateButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                List<Room> entities = getListRoomInJTable(jt);
-                roomService.managerUpdate(entities);
+                List<Student> entities = getListObjectInJTable(jt);
+                studentService.managerUpdate(entities);
             }
         });
 
@@ -175,43 +176,43 @@ public class StudentManager extends JFrame {
     }
 
 
-    DataModel getDefaultTableModelRoom(List<Room> list) {
+    DataModel getDefaultTableModelObj(List<Student> list) {
         if (ObjectUtils.isEmpty(list)) {
-            String columns[] = {"ID", "Mã phòng học", "Tên phòng học"};
+            String columns[] = {"ID", "Mã số sinh viên", "Tên sinh viên"};
             DataModel model = new DataModel(columns, 0);
             return model;
         }
         String data[][] = new String[list.size()][];
 
-        String columns[] = {"ID", "Mã phòng học", "Tên phòng học"};
+        String columns[] = {"ID", "Mã số sinh viên", "Tên sinh viên"};
 
         DataModel model = new DataModel(columns, 0);
 
         for (int i = 0; i < list.size(); i++) {
-            model.addRow(convertRoomToStrArr(list.get(i)));
+            model.addRow(convertObjToStrArr(list.get(i)));
         }
 
         return model;
     }
 
-    String[] convertRoomToStrArr(Room room) {
+    String[] convertObjToStrArr(Student student) {
         String[] results = new String[3];
-        results[0] = String.valueOf(room.getId());
-        results[1] = String.valueOf(room.getCode());
-        results[2] = room.getName();
+        results[0] = String.valueOf(student.getId());
+        results[1] = String.valueOf(student.getMssv());
+        results[2] = student.getName();
         return results;
     }
 
 
-    private List<Room> getListRoomInJTable(JTable jt) {
-        List<Room> result = new ArrayList<>();
+    private List<Student> getListObjectInJTable(JTable jt) {
+        List<Student> result = new ArrayList<>();
         for (int i = 0; i < jt.getRowCount(); i++) {
             int id = Integer.valueOf(String.valueOf(jt.getValueAt(i, 0)));
-            String code = String.valueOf(jt.getValueAt(i, 1));
+            String mssv = String.valueOf(jt.getValueAt(i, 1));
             String name = String.valueOf(jt.getValueAt(i, 2));
-            Room entity = new Room()
+            Student entity = new Student()
                     .setId(id)
-                    .setCode(code)
+                    .setMssv(mssv)
                     .setName(name);
             result.add(entity);
         }
