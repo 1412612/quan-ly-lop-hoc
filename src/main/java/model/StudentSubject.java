@@ -16,10 +16,10 @@ public class StudentSubject {
     @Column(name = "mssv", nullable = false)
     private String mssv;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "subject_code", referencedColumnName = "code")
-    private Subject subject;
-
+//    @OneToOne(cascade = CascadeType.ALL)
+//    @JoinColumn(name = "subject_code", referencedColumnName = "code")
+    @Column(name = "subject_id", nullable = false)
+    private int subjectId;
 
     @Column(name = "session_one", nullable = false)
     private boolean sessionOne;

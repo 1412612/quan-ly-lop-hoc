@@ -1,6 +1,7 @@
 package model;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -9,8 +10,10 @@ import java.util.Date;
 @Data
 @Entity
 @Table(name = "subject")
+@Accessors(chain = true)
 public class Subject {
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private int id;
 
@@ -24,17 +27,18 @@ public class Subject {
     private Date dateStart;
 
     @Column(name = "date_end", nullable = false)
-    private Date date_end;
+    private Date dateEnd;
 
     @Column(name = "day_of_week", nullable = false)
     private int dayOfWeek;
 
     @Column(name = "time_start", nullable = false)
-    private Timestamp timeStart;
+    private String timeStart;
 
     @Column(name = "time_end", nullable = false)
-    private Timestamp timeEnd;
+    private String timeEnd;
 
-    @JoinColumn(name = "id_room")
-    private int roomId;
+    @ManyToOne
+    @JoinColumn(name = "id_room", nullable = false)
+    private Room room;
 }

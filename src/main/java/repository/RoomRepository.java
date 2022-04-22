@@ -31,6 +31,26 @@ public class RoomRepository {
         return null;
     }
 
+    public Room getByCode(String code){
+        SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
+        Session session = sessionFactory.openSession();
+
+        String sql = "Select r from " + Room.class.getName() + " r where r.code =:code";
+
+        Query<Room> query = session.createQuery(sql);
+
+        query.setParameter("code",code);
+
+        List<Room> results = query.getResultList();
+
+        session.close();
+
+        if(ObjectUtils.isNotEmpty(results)){
+            return results.get(0);
+        }
+        return null;
+    }
+
     public void update(Room room){
         SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
         Session session = sessionFactory.openSession();

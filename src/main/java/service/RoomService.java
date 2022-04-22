@@ -35,4 +35,8 @@ public class RoomService {
     public void delete(Room room){
         roomRepository.delete(room);
     }
+
+    public Room getByCode(String code){
+        return  roomRepository.getByCode(code);
+    }
 }
