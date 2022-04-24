@@ -153,8 +153,8 @@ public class StudentSubjectSV extends JFrame {
 //
 //        contentPane.add(addButton);
 
-        Button detailButton = new Button("Chi tiết");
-        detailButton.setBounds(150 + 175+175 +100, 500, 100, 30);
+        Button detailButton = new Button("Lịch sử điểm danh");
+        detailButton.setBounds(150 + 175+175 +100, 500, 200, 30);
         detailButton.setForeground(new Color(255, 255, 255));
         detailButton.setBackground(new Color(0, 128, 255));
         detailButton.setFont(new Font("Tahoma", Font.PLAIN, 20));

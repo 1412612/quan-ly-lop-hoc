@@ -37,7 +37,7 @@ public class StudentSubjectService {
                 .map(StudentSubject::getMssv)
                 .collect(Collectors.toList());
 
-        if(ObjectUtils.isEmpty(mssvs)) return new ArrayList<>();
+        //if(ObjectUtils.isEmpty(mssvs)) return new ArrayList<>();
 
         return Optional.ofNullable(studentRepository.getByNotListMssv(mssvs)).orElse(new ArrayList<>());
     }

@@ -6,17 +6,20 @@ import data.DataModel;
 import lombok.SneakyThrows;
 import model.AcademicStaff;
 import model.Student;
+import model.StudentSubject;
 import model.Subject;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.poi.xssf.usermodel.XSSFCell;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import repository.StudentRepository;
 import repository.StudentSubjectRepository;
 import repository.SubjectRepository;
 import service.AcademicStaffService;
 import service.StudentService;
 import service.StudentSubjectService;
+import utils.PasswordUtils;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -42,6 +45,7 @@ public class StudentSubjectManager extends JFrame {
     private Subject subject;
     private StudentSubjectService studentSubjectService = new StudentSubjectService();
     private StudentSubjectRepository studentSubjectRepository = new StudentSubjectRepository();
+    StudentRepository studentRepository = new StudentRepository();
     int lastStudentId = 0;
 
     public static void main(String[] args) {
@@ -106,7 +110,7 @@ public class StudentSubjectManager extends JFrame {
 
         jt.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         JButton deleteButton = new JButton("Xóa");
-        deleteButton.setBounds(130+150+150 + 150 + 150 +150 , 500, 100, 30);
+        deleteButton.setBounds(25+100+50 + 100+50 + 150+50 + 150 + 100+100 , 500, 100, 30);
         deleteButton.setForeground(new Color(255, 255, 255));
         deleteButton.setBackground(new Color(0, 128, 255));
         deleteButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -128,7 +132,7 @@ public class StudentSubjectManager extends JFrame {
 
 
         Button backButton = new Button("Quay lại");
-        backButton.setBounds(20, 500, 100, 30);
+        backButton.setBounds(25, 500, 100, 30);
         backButton.setForeground(new Color(255, 255, 255));
         backButton.setBackground(new Color(0, 128, 255));
         backButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -143,7 +147,7 @@ public class StudentSubjectManager extends JFrame {
         contentPane.add(backButton);
 
         Button addButton = new Button("Thêm mới");
-        addButton.setBounds(130+150, 500, 100, 30);
+        addButton.setBounds(25+100+50, 500, 100, 30);
         addButton.setForeground(new Color(255, 255, 255));
         addButton.setBackground(new Color(0, 128, 255));
         addButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -159,7 +163,7 @@ public class StudentSubjectManager extends JFrame {
 
 
         Button updateButton = new Button("Duyệt sinh viên");
-        updateButton.setBounds(130+150+150, 500, 100, 30);
+        updateButton.setBounds(25+100+50 + 100+50, 500, 150, 30);
         updateButton.setForeground(new Color(255, 255, 255));
         updateButton.setBackground(new Color(0, 128, 255));
         updateButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -175,7 +179,7 @@ public class StudentSubjectManager extends JFrame {
 
 
         Button templateButton = new Button("Tải template");
-        templateButton.setBounds(130+150+150 + 150, 500, 100, 30);
+        templateButton.setBounds(25+100+50 + 100+50 + 150+50, 500, 150, 30);
         templateButton.setForeground(new Color(255, 255, 255));
         templateButton.setBackground(new Color(0, 128, 255));
         templateButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -193,18 +197,101 @@ public class StudentSubjectManager extends JFrame {
         contentPane.add(templateButton);
 
         Button importButton = new Button("Tải lên DS");
-        importButton.setBounds(130+150+150 + 150 + 150, 500, 100, 30);
+        importButton.setBounds(25+100+50 + 100+50 + 150+50 + 150 + 50, 500, 100, 30);
         importButton.setForeground(new Color(255, 255, 255));
         importButton.setBackground(new Color(0, 128, 255));
         importButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
+//        importButton.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent e) {
+////                AddListStudentSubject child = new AddListStudentSubject(username, id);
+////                child.setVisible(true);
+////                dispose();
+//            }
+//        });
+
+        contentPane.add(importButton);
+
+
+        final JFileChooser fileDialog = new JFileChooser();
         importButton.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent e) {
-//                AddListStudentSubject child = new AddListStudentSubject(username, id);
-//                child.setVisible(true);
-//                dispose();
+                //               int returnVal = fileDialog.showOpenDialog(mainFrame);
+//                if (returnVal == JFileChooser.APPROVE_OPTION) {
+//                    java.io.File file = fileDialog.getSelectedFile();
+//                    statusLabel.setText("File Selected :" + file.getName());
+//                } else {
+//                    statusLabel.setText("Open command cancelled by user.");
+//                }
+
+                File excelFile;
+                FileInputStream excelFIS = null;
+                BufferedInputStream excelBIS = null;
+                XSSFWorkbook excelImportToJTable = null;
+                String defaultCurrentDirectoryPath = "C:\\Users\\Authentic\\Desktop";
+                JFileChooser excelFileChooser = new JFileChooser(defaultCurrentDirectoryPath);
+                excelFileChooser.setDialogTitle("Select Excel File");
+
+                excelFileChooser.setDialogTitle("Select Excel File");
+                FileNameExtensionFilter fnef = new FileNameExtensionFilter("EXCEL FILES", "xls", "xlsx", "xlsm");
+                excelFileChooser.setFileFilter(fnef);
+                int excelChooser = excelFileChooser.showOpenDialog(null);
+
+                if (excelChooser == JFileChooser.APPROVE_OPTION) {
+                    try {
+                        String columns[] = {"ID", "Mã số sinh viên", "Tên sinh viên"};
+                        DataModel model = new DataModel(columns, 0);
+                        excelFile = excelFileChooser.getSelectedFile();
+                        excelFIS = new FileInputStream(excelFile);
+                        excelBIS = new BufferedInputStream(excelFIS);
+                        excelImportToJTable = new XSSFWorkbook(excelBIS);
+                        XSSFSheet excelSheet = excelImportToJTable.getSheetAt(0);
+
+                        for (int row = 1; row <= excelSheet.getLastRowNum(); row++) {
+                            XSSFRow excelRow = excelSheet.getRow(row);
+
+                            String excelId = String.valueOf(excelRow.getCell(0)).split("\\.")[0];
+                            XSSFCell excelMSSV = excelRow.getCell(1);
+                            XSSFCell excelName = excelRow.getCell(2);
+
+                            model.addRow(new Object[]{excelId, excelMSSV, excelName});
+                            Student student = new Student()
+                                    .setMssv(excelMSSV.getStringCellValue())
+                                    .setName(excelName.getStringCellValue())
+                                    .setPassword(PasswordUtils.passwordEncoder.encode(excelMSSV.getStringCellValue()));
+
+                            studentRepository.save(student);
+
+                            StudentSubject studentSubject = new StudentSubject()
+                                    .setSubjectId(id)
+                                    .setMssv(excelMSSV.getStringCellValue());
+                            studentSubjectRepository.save(studentSubject);
+                            JOptionPane.showMessageDialog(null, "Import file sinh viên vào lớp thành công!");
+                            StudentSubjectManager subjectManager = new StudentSubjectManager(username, id);
+                            subjectManager.setVisible(true);
+                            dispose();
+                        }
+                        //JOptionPane.showMessageDialog(null, "Imported Successfully !!.....");
+                    } catch (IOException iOException) {
+                        JOptionPane.showMessageDialog(null, iOException.getMessage());
+                    } finally {
+                        try {
+                            if (excelFIS != null) {
+                                excelFIS.close();
+                            }
+                            if (excelBIS != null) {
+                                excelBIS.close();
+                            }
+                            if (excelImportToJTable != null) {
+                                excelImportToJTable.close();
+                            }
+                        } catch (IOException iOException) {
+                            JOptionPane.showMessageDialog(null, iOException.getMessage());
+                        }
+                    }
+                }
             }
         });
-
         contentPane.add(importButton);
     }
 

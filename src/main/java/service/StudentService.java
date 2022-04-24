@@ -28,14 +28,14 @@ public class StudentService {
         return studentRepository.getAll();
     }
 
-    public void managerUpdate(List<Student> students){
+    public boolean managerUpdate(List<Student> students){
         List<Student> oldStudent = getAllStudent();
         if(ObjectUtils.isEmpty(oldStudent)){
             students.stream().forEach(item->{
                 item.setPassword(PasswordUtils.passwordEncoder.encode(item.getMssv()));
                 studentRepository.save(item);
             });
-            return;
+            return true;
         }
 
         students.stream().forEach(item->{
@@ -51,15 +51,20 @@ public class StudentService {
 
         List<Student> addStudent = students.stream().filter(student -> !oldStudent.contains(student)).collect(Collectors.toList());
 
-        deleteStudent.stream().forEach(item->studentRepository.deleteById(item.getId()));
+        for( Student item : deleteStudent){
+            boolean b = studentRepository.deleteById(item.getId());
+            if(!b) return false;
+        }
         updateStudent.stream().forEach(item->studentRepository.update(item));
         addStudent.stream().forEach(item->{
             item.setPassword(PasswordUtils.passwordEncoder.encode(item.getMssv()));
             studentRepository.save(item);
         });
+
+        return true;
     }
 
-    public void delete(Student student){
-        studentRepository.deleteById(student.getId());
+    public boolean delete(Student student){
+        return studentRepository.deleteById(student.getId());
     }
 }

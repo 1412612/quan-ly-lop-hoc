@@ -3,6 +3,7 @@ package repository;
 import model.AcademicStaff;
 import model.Room;
 import model.Student;
+import model.StudentSubject;
 import org.apache.commons.lang3.ObjectUtils;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -12,6 +13,8 @@ import utils.HibernateUtils;
 import java.util.List;
 
 public class StudentRepository {
+    private StudentSubjectRepository studentSubjectRepository = new StudentSubjectRepository();
+
     public Student getByMssv(String mssv){
         SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
         Session session = sessionFactory.openSession();
@@ -55,6 +58,24 @@ public class StudentRepository {
     }
 
     public List<Student> getByNotListMssv(List<String> mssv){
+        if(ObjectUtils.isEmpty(mssv)){
+            SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
+            Session session = sessionFactory.openSession();
+
+            String sql = "Select s from " + Student.class.getName() + " s ";
+
+            Query<Student> query = session.createQuery(sql);
+
+            List<Student> results = query.getResultList();
+
+            session.close();
+
+            if(ObjectUtils.isNotEmpty(results)){
+                return results;
+            }
+            return null;
+        }
+
         SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
         Session session = sessionFactory.openSession();
 
@@ -122,11 +143,15 @@ public class StudentRepository {
         return null;
     }
 
-    public void deleteById(int id){
+    public boolean deleteById(int id){
         SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
         Session session = sessionFactory.openSession();
+        Student student = session.load(Student.class, id);
+        List<StudentSubject> studentSubject = studentSubjectRepository.getByMssv(student.getMssv());
+        if(ObjectUtils.isNotEmpty(studentSubject)) return false;
         Student entity = getById(id);
         delete(entity);
+        return true;
     }
 
     public void delete(Student student){

@@ -26,17 +26,16 @@ public class WriteExcel {
     private static CellStyle cellStyleFormatNumber = null;
 
     public static void renderTemplate() throws IOException {
-        final List<Book> books = getBooks();
         final String excelFilePath = "C:\\Users\\NGUYEN VAN THANH\\Desktop\\template.xlsx";
-        writeExcel(books, excelFilePath);
+        writeExcel(excelFilePath);
     }
 
-    public static void writeExcel(List<Book> books, String excelFilePath) throws IOException {
+    public static void writeExcel(String excelFilePath) throws IOException {
         // Create Workbook
         Workbook workbook = getWorkbook(excelFilePath);
 
         // Create sheet
-        Sheet sheet = workbook.createSheet("template"); // Create sheet with sheet name
+        Sheet sheet = workbook.createSheet("Sheet1"); // Create sheet with sheet name
 
         int rowIndex = 0;
 
@@ -45,18 +44,18 @@ public class WriteExcel {
 
         // Write data
         rowIndex++;
-//        for (Book book : books) {
-//            // Create row
-//            Row row = sheet.createRow(rowIndex);
-//            // Write data on row
-//            writeBook(book, row);
-//            rowIndex++;
-//        }
-
-        // Write footer
+////        for (Book book : books) {
+////            // Create row
+////            Row row = sheet.createRow(rowIndex);
+////            // Write data on row
+////            writeBook(book, row);
+////            rowIndex++;
+////        }
+//
+////         Write footer
 //        writeFooter(sheet, rowIndex);
-
-        // Auto resize column witdth
+//
+//        // Auto resize column witdth
         int numberOfColumn = sheet.getRow(0).getPhysicalNumberOfCells();
         autosizeColumn(sheet, numberOfColumn);
 
@@ -110,7 +109,7 @@ public class WriteExcel {
 
         cell = row.createCell(COLUMN_INDEX_NAME);
         cell.setCellStyle(cellStyle);
-        cell.setCellValue("Name");
+        cell.setCellValue("NAME");
     }
 
 

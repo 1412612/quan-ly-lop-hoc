@@ -32,8 +32,8 @@ public class RoomService {
         addRoom.stream().forEach(item->roomRepository.save(item));
     }
 
-    public void delete(Room room){
-        roomRepository.delete(room);
+    public boolean delete(Room room){
+        return roomRepository.delete(room);
     }
 
     public Room getByCode(String code){

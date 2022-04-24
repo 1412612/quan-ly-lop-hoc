@@ -104,7 +104,7 @@ public class JFileChooserExam1 {
                         excelImportToJTable = new XSSFWorkbook(excelBIS);
                         XSSFSheet excelSheet = excelImportToJTable.getSheetAt(0);
 
-                        for (int row = 1; row < excelSheet.getLastRowNum(); row++) {
+                        for (int row = 1; row <= excelSheet.getLastRowNum(); row++) {
                             XSSFRow excelRow = excelSheet.getRow(row);
 
                             String excelId = String.valueOf(excelRow.getCell(0)).split("\\.")[0];

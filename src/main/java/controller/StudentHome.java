@@ -93,7 +93,7 @@ public class StudentHome extends JFrame {
 
 
         Button accountManagementButton = new Button("Quản lý tài khoản");
-        accountManagementButton.setBounds(10, 310, 170, 50);
+        accountManagementButton.setBounds(10, 200, 170, 50);
         accountManagementButton.setForeground(new Color(0, 0, 0));
         accountManagementButton.setBackground(UIManager.getColor("Button.disabledForeground"));
         accountManagementButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -156,10 +156,6 @@ public class StudentHome extends JFrame {
         mainPanel.add(jScrollPane);
 
         mainPanel.setBounds(200, 0, 800, 600);
-
-
-
-
 
         return mainPanel;
     }

@@ -103,7 +103,8 @@ public class RoomManager extends JFrame {
                                 .setCode(String.valueOf(jt.getValueAt(jt.getSelectedRow(), 1)))
                                 .setName(String.valueOf(jt.getValueAt(jt.getSelectedRow(), 2)));
 
-                        roomService.delete(entity);
+                        boolean b = roomService.delete(entity);
+                        if(!b) return;
                         model.removeRow(jt.getSelectedRow());
                     }
                 }

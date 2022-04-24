@@ -104,8 +104,15 @@ public class StudentManager extends JFrame {
                                 .setMssv(String.valueOf(jt.getValueAt(jt.getSelectedRow(), 1)))
                                 .setName(String.valueOf(jt.getValueAt(jt.getSelectedRow(), 2)));
 
-                        studentService.delete(entity);
+                        boolean b = studentService.delete(entity);
+                        if(!b) {
+                            JOptionPane.showMessageDialog(null, "Không thể xóa sinh viên do sinh viên thuộc một số lớp học!");
+                            return;
+                        }
                         model.removeRow(jt.getSelectedRow());
+                        StudentManager studentManager = new StudentManager(username);
+                        studentManager.setVisible(true);
+                        dispose();
                     }
                 }
             }
@@ -168,7 +175,10 @@ public class StudentManager extends JFrame {
         updateButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 List<Student> entities = getListObjectInJTable(jt);
-                studentService.managerUpdate(entities);
+                boolean b = studentService.managerUpdate(entities);
+                StudentManager studentManager = new StudentManager(username);
+                studentManager.setVisible(true);
+                dispose();
             }
         });
 

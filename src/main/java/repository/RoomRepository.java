@@ -9,6 +9,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import utils.HibernateUtils;
 
+import javax.swing.*;
 import java.util.List;
 
 public class RoomRepository {
@@ -59,12 +60,19 @@ public class RoomRepository {
         session.close();
     }
 
-    public void delete(Room room){
+    public boolean delete(Room room){
+        try{
         SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
         Session session = sessionFactory.openSession();
         session.delete(room);
         session.flush();
         session.close();
+        return true;
+        }
+        catch (Exception e){
+            JOptionPane.showMessageDialog(null, "Phòng học đang được sử dụng, không thể xóa!");
+        return false;
+        }
     }
 
     public void save(Room room){
