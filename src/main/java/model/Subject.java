@@ -30,7 +30,7 @@ public class Subject {
     private Date dateEnd;
 
     @Column(name = "day_of_week", nullable = false)
-    private int dayOfWeek;
+    private String dayOfWeek;
 
     @Column(name = "time_start", nullable = false)
     private String timeStart;

@@ -19,8 +19,8 @@ public class DataModel extends DefaultTableModel {
 
     @Override
     public Class<?> getColumnClass(int col) {
-        if (col == 1) {
-            return getValueAt(0, 1).getClass();
+        if (col ==3) {
+            return getValueAt(0, 3).getClass();
         }
         return super.getColumnClass(col);
     }

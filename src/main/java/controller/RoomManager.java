@@ -47,7 +47,7 @@ public class RoomManager extends JFrame {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Quản lý phòng học");
-        setBounds(450, 190, 1000, 600);
+        setBounds(250, 150, 1000, 600);
         setResizable(false);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -168,6 +168,8 @@ public class RoomManager extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 List<Room> entities = getListRoomInJTable(jt);
                 roomService.managerUpdate(entities);
+                JOptionPane.showMessageDialog(null, "Cập nhật thành công!");
+
             }
         });
 

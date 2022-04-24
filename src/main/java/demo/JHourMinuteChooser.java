@@ -81,13 +81,14 @@ public final class JHourMinuteChooser extends javax.swing.JPanel {
     public void setTimeFromString(String toBeParsed){
         if(toBeParsed.matches("\\d{1,2}\\s*\\:\\s*\\d{2}\\s+[AP]M")){
             String[] splitted = toBeParsed.split("\\:");
+            String[] splitted1 = splitted[1].split(" ");
             currentTime = new Date();
             int hour=Integer.parseInt(splitted[0]);
-            if("PM".equals(splitted[2])){
+            if("PM".equals(splitted1[1])){
                 hour+=12;
             }
             currentTime.setHours(hour);
-            int minutes=Integer.parseInt(splitted[1]);
+            int minutes=Integer.parseInt(splitted1[0]);
             currentTime.setMinutes(minutes);
         }
         updateCurrentTimeInGUI();

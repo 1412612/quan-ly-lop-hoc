@@ -1,15 +1,17 @@
 package model;
 
 import lombok.Data;
+import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "student_subject")
 @Data
-
+@Accessors(chain = true)
 public class StudentSubject {
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private int id;
 

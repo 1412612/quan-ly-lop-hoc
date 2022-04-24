@@ -44,7 +44,7 @@ public class ChangePasswordDefault extends JFrame {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Đổi mật khẩu");
-        setBounds(450, 190, 1014, 597);
+        setBounds(250, 150, 1014, 597);
         setResizable(false);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

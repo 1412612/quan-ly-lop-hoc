@@ -1,13 +1,16 @@
 package controller;
 
 
+import constant.DayOfWeekConstant;
 import data.DataModel;
+import data.Table;
 import model.AcademicStaff;
 import model.Room;
 import model.Subject;
 import org.apache.commons.lang3.ObjectUtils;
+import repository.SubjectRepository;
 import service.AcademicStaffService;
-import service.RoomService;
+import utils.DateToString;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -21,7 +24,7 @@ public class SubjectManager extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
-    private RoomService roomService = new RoomService();
+    private SubjectRepository subjectRepository = new SubjectRepository();
     private AcademicStaff academicStaff;
     private AcademicStaffService academicStaffService = new AcademicStaffService();
     int lastRoomId = 0;
@@ -55,10 +58,10 @@ public class SubjectManager extends JFrame {
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        List<Room> roomList = roomService.getAllRoom();
+        List<Subject> subjects = subjectRepository.getAll();
 
-        if (ObjectUtils.isNotEmpty(roomList))
-            lastRoomId = roomList.get(roomList.size() - 1).getId();
+//        if (ObjectUtils.isNotEmpty(roomList))
+//            lastRoomId = roomList.get(roomList.size() - 1).getId();
 
         JLabel headerLabel = new JLabel("Quản lý lớp học:");
         headerLabel.setBackground(Color.BLACK);
@@ -75,43 +78,44 @@ public class SubjectManager extends JFrame {
         contentPane.add(contentLabel);
 
 
-        DataModel model = getDefaultTableModelRoom(roomList);
-        JTable jt = new JTable(model);
+        DataModel model = getDefaultTableModel(subjects);
+        Table jt = new Table(model);
+        jt.setColumnWidths(30, 60,80,60,60, 150, 150,130,130);
         jt.setRowHeight(20);
         jt.getTableHeader().setBackground(new Color(255, 128, 0));
         jt.getTableHeader().setForeground(Color.WHITE);
-        jt.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 20));
+        jt.getTableHeader().setFont(new Font("Tahoma", Font.PLAIN, 18));
         jt.setBounds(200, 0, 650, 400);
         JScrollPane sp = new JScrollPane(jt);
-        sp.setBounds(50, 100, 800, 350);
+        sp.setBounds(30, 100, 850, 350);
         contentPane.add(sp);
 
         jt.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        JButton deleteButton = new JButton("Xóa");
-        deleteButton.setBounds(150 + 175 + 100 + 175 + 100 + 175, 500, 100, 30);
-        deleteButton.setForeground(new Color(255, 255, 255));
-        deleteButton.setBackground(new Color(0, 128, 255));
-        deleteButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        deleteButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {
-                // check for selected row first
-                if (jt.getSelectedRow() != -1) {
-                    int a = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xóa phòng học này?");
-                    if (a == JOptionPane.YES_OPTION) {
-                        Room entity = new Room()
-                                .setId(Integer.valueOf(String.valueOf(jt.getValueAt(jt.getSelectedRow(), 0))))
-                                .setCode(String.valueOf(jt.getValueAt(jt.getSelectedRow(), 1)))
-                                .setName(String.valueOf(jt.getValueAt(jt.getSelectedRow(), 2)));
-
-                        roomService.delete(entity);
-                        model.removeRow(jt.getSelectedRow());
-                    }
-                }
-            }
-        });
-
-        contentPane.add(deleteButton);
+//        JButton deleteButton = new JButton("Xóa");
+//        deleteButton.setBounds(150 + 175 + 100 + 175 + 100 + 175, 500, 100, 30);
+//        deleteButton.setForeground(new Color(255, 255, 255));
+//        deleteButton.setBackground(new Color(0, 128, 255));
+//        deleteButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
+//        deleteButton.addActionListener(new ActionListener() {
+//            @Override
+//            public void actionPerformed(ActionEvent ae) {
+//                // check for selected row first
+//                if (jt.getSelectedRow() != -1) {
+//                    int a = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xóa phòng học này?");
+//                    if (a == JOptionPane.YES_OPTION) {
+//                        Room entity = new Room()
+//                                .setId(Integer.valueOf(String.valueOf(jt.getValueAt(jt.getSelectedRow(), 0))))
+//                                .setCode(String.valueOf(jt.getValueAt(jt.getSelectedRow(), 1)))
+//                                .setName(String.valueOf(jt.getValueAt(jt.getSelectedRow(), 2)));
+//
+//                        //roomService.delete(entity);
+//                        model.removeRow(jt.getSelectedRow());
+//                    }
+//                }
+//            }
+//        });
+//
+//        contentPane.add(deleteButton);
 
 
         Button backButton = new Button("Quay lại");
@@ -136,72 +140,50 @@ public class SubjectManager extends JFrame {
         addButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
         addButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                JTextField text1 = new JTextField(String.valueOf(++lastRoomId));
-                text1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-                JTextField text2 = new JTextField();
-                text2.setFont(new Font("Tahoma", Font.PLAIN, 20));
-                JTextField text3 = new JTextField();
-                text3.setFont(new Font("Tahoma", Font.PLAIN, 20));
-                JTextField text4 = new JTextField();
-                text4.setFont(new Font("Tahoma", Font.PLAIN, 20));
-                JTextField text5 = new JTextField();
-                text5.setFont(new Font("Tahoma", Font.PLAIN, 20));
-                JTextField text6 = new JTextField();
-                text6.setFont(new Font("Tahoma", Font.PLAIN, 20));
-                JTextField text7 = new JTextField();
-                text7.setFont(new Font("Tahoma", Font.PLAIN, 20));
-                JTextField text8 = new JTextField();
-                text8.setFont(new Font("Tahoma", Font.PLAIN, 20));
-                JTextField text9 = new JTextField();
-                text9.setFont(new Font("Tahoma", Font.PLAIN, 20));
-
-                model.addRow(
-                        new Object[]{
-                                text1.getText(),
-                                text2.getText(),
-                                text3.getText(),
-                                text4.getText(),
-                                text5.getText(),
-                                text6.getText(),
-                                text7.getText(),
-                                text8.getText(),
-                                text9.getText()
-                        }
-                );
-
-                text1.setText("");
-                text2.setText("");
-                text3.setText("");
-                text4.setText("");
-                text5.setText("");
-                text6.setText("");
-                text7.setText("");
-                text8.setText("");
-                text9.setText("");
-
+                AddSubject addSubject = new AddSubject(username);
+                addSubject.setVisible(true);
+                dispose();
             }
         });
 
         contentPane.add(addButton);
 
-
-        Button updateButton = new Button("Cập nhật");
-        updateButton.setBounds(150 + 175 + 100 + 175, 500, 100, 30);
-        updateButton.setForeground(new Color(255, 255, 255));
-        updateButton.setBackground(new Color(0, 128, 255));
-        updateButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        updateButton.addActionListener(new ActionListener() {
+        Button detailButton = new Button("Chi tiết");
+        detailButton.setBounds(150 + 175+175 +100, 500, 100, 30);
+        detailButton.setForeground(new Color(255, 255, 255));
+        detailButton.setBackground(new Color(0, 128, 255));
+        detailButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
+        detailButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                List<Subject> entities = getListObjInJTable(jt);
-                //roomService.managerUpdate(entities);
+                if (jt.getSelectedRow() != -1) {
+                    Integer id = Integer.valueOf(String.valueOf(jt.getValueAt(jt.getSelectedRow(), 0)));
+                    DetailSubject addSubject = new DetailSubject(username, id);
+                    addSubject.setVisible(true);
+                    dispose();
+                }
             }
         });
 
-        contentPane.add(updateButton);
+        contentPane.add(detailButton);
+
+
+//        Button updateButton = new Button("Cập nhật");
+//        updateButton.setBounds(150 + 175 + 100 + 175, 500, 100, 30);
+//        updateButton.setForeground(new Color(255, 255, 255));
+//        updateButton.setBackground(new Color(0, 128, 255));
+//        updateButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
+//        updateButton.addActionListener(new ActionListener() {
+//            public void actionPerformed(ActionEvent e) {
+//                List<Subject> entities = getListObjInJTable(jt);
+//                //roomService.managerUpdate(entities);
+//            }
+//        });
+//
+//        contentPane.add(updateButton);
     }
 
 
-    DataModel getDefaultTableModelRoom(List<Room> list) {
+    DataModel getDefaultTableModel(List<Subject> list) {
         if (ObjectUtils.isEmpty(list)) {
             String columns[] = {"ID", "Mã lớp", "Tên lớp", "Phòng", "Thứ", "Thời gian bắt đầu", "Thời gian kết thúc" ,"Ngày bắt đầu", "Ngày kết thúc"};
 
@@ -215,17 +197,23 @@ public class SubjectManager extends JFrame {
         DataModel model = new DataModel(columns, 0);
 
         for (int i = 0; i < list.size(); i++) {
-            model.addRow(convertRoomToStrArr(list.get(i)));
+            model.addRow(convertObjToStrArr(list.get(i)));
         }
 
         return model;
     }
 
-    String[] convertRoomToStrArr(Room room) {
-        String[] results = new String[3];
-        results[0] = String.valueOf(room.getId());
-        results[1] = String.valueOf(room.getCode());
-        results[2] = room.getName();
+    String[] convertObjToStrArr(Subject subject) {
+        String[] results = new String[9];
+        results[0] = String.valueOf(subject.getId());
+        results[1] = String.valueOf(subject.getCode());
+        results[2] = String.valueOf(subject.getName());
+        results[3] = String.valueOf(subject.getRoom().getCode());
+        results[4] = String.valueOf(subject.getDayOfWeek());
+        results[5] = String.valueOf(new DateToString().convert(subject.getDateStart()));
+        results[6] = String.valueOf(new DateToString().convert(subject.getDateEnd()));
+        results[7] = String.valueOf(subject.getTimeStart());
+        results[8] = String.valueOf(subject.getTimeEnd());
         return results;
     }
 

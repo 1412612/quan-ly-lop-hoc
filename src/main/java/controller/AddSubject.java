@@ -39,14 +39,7 @@ public class AddSubject extends JFrame {
         });
     }
 
-    public AddSubject() {
-
-    }
-
-    /**
-     * Create the frame.
-     */
-    public AddSubject(final String userSes) {
+    public AddSubject(String username) {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Thêm môn học mới");
@@ -203,9 +196,9 @@ public class AddSubject extends JFrame {
         backButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-//                AcademicStaffHome academicStaffHome = new AcademicStaffHome(username);
-//                academicStaffHome.setVisible(true);
-//                dispose();
+                 SubjectManager subjectManager = new SubjectManager(username);
+                subjectManager.setVisible(true);
+                dispose();
             }
         });
 
@@ -246,7 +239,7 @@ public class AddSubject extends JFrame {
                 Subject subject = new Subject()
                         .setCode(codeSubject)
                         .setName(nameSubject)
-                        .setDayOfWeek(DayOfWeekConstant.DAY_OF_WEEK_MAP.get(dayOfWeekSubject))
+                        .setDayOfWeek(dayOfWeekSubject)
                         .setRoom(roomService.getByCode(roomCodeSubject))
                         .setDateStart(dateStart)
                         .setDateEnd(dateEnd)
@@ -254,6 +247,9 @@ public class AddSubject extends JFrame {
                         .setTimeEnd(timeEnd);
                 subjectRepository.save(subject);
                 JOptionPane.showMessageDialog(null, "Thêm lớp học thành công!");
+                SubjectManager subjectManager = new SubjectManager(username);
+                subjectManager.setVisible(true);
+                dispose();
             }
         });
 

@@ -54,6 +54,27 @@ public class StudentRepository {
         return null;
     }
 
+    public List<Student> getByNotListMssv(List<String> mssv){
+        SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
+        Session session = sessionFactory.openSession();
+
+        String sql = "Select s from " + Student.class.getName() + " s "
+                + "where s.mssv not in :mssv";
+
+        Query<Student> query = session.createQuery(sql);
+
+        query.setParameter("mssv", mssv);
+
+        List<Student> results = query.getResultList();
+
+        session.close();
+
+        if(ObjectUtils.isNotEmpty(results)){
+            return results;
+        }
+        return null;
+    }
+
     public Student getById(int id){
         SessionFactory sessionFactory = HibernateUtils.getSessionFactory();
         Session session = sessionFactory.openSession();

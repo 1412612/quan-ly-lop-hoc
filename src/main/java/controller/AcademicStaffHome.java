@@ -43,18 +43,18 @@ public class AcademicStaffHome extends JFrame {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Trang chủ giáo vụ");
-        setBounds(450, 190, 1000, 600);
+        setBounds(250, 150, 1000, 600);
         setResizable(false);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
         contentPane.setLayout(null);
 
-        JLabel infoLabel = new JLabel("Thông tin:");
+        JLabel infoLabel = new JLabel("Thông tin giáo vụ:");
         infoLabel.setBackground(Color.BLACK);
         infoLabel.setForeground(Color.BLACK);
         infoLabel.setFont(new Font("Tahoma", Font.PLAIN, 26));
-        infoLabel.setBounds(300, 50, 200, 50);
+        infoLabel.setBounds(300, 50, 500, 50);
         contentPane.add(infoLabel);
 
         JLabel usernameLabel = new JLabel("Tài khoản: "+ academicStaff.getUsername());
@@ -84,7 +84,9 @@ public class AcademicStaffHome extends JFrame {
         subjectManagementButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
         subjectManagementButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-
+                SubjectManager manager = new SubjectManager(username);
+                manager.setVisible(true);
+                dispose();
             }
         });
 

@@ -1,5 +1,6 @@
 package controller;
 
+import data.DefaultModel;
 import model.AcademicStaff;
 import service.AcademicStaffService;
 import utils.PasswordUtils;
@@ -38,7 +39,7 @@ public class AcademicStaffChangePassword extends JFrame {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Đổi mật khẩu");
-        setBounds(450, 190, 1014, 597);
+        setBounds(250, 150, 1014, 597);
         setResizable(false);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -84,8 +85,8 @@ public class AcademicStaffChangePassword extends JFrame {
         contentPane.add(confirmPassword);
         confirmPassword.setColumns(10);
 
-        JButton button = new JButton("Đổi mật khẩu\r\n");
-        button.setBackground(UIManager.getColor("Button.disabledForeground"));
+        Button button = DefaultModel.getDefaultButton("Đổi mật khẩu");
+
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 String oldPassStr = oldPassword.getText();
@@ -111,9 +112,20 @@ public class AcademicStaffChangePassword extends JFrame {
                 }
             }
         });
-        button.setFont(new Font("Tahoma", Font.PLAIN, 26));
-        button.setBounds(247, 350, 300, 80);
+        button.setBounds(500, 350, 200, 50);
         contentPane.add(button);
+
+        Button backButton = DefaultModel.getDefaultButton("Quay lại");
+        backButton.setBounds(100,350,200,50);
+        backButton.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                AcademicStaffHome academicStaffHome = new AcademicStaffHome(username);
+                academicStaffHome.setVisible(true);
+                dispose();
+            }
+        });
+
+        contentPane.add(backButton);
     }
 }
 

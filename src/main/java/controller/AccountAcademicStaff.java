@@ -1,5 +1,7 @@
 package controller;
 
+import data.DefaultModel;
+
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -32,7 +34,7 @@ public class AccountAcademicStaff extends JFrame {
 
             setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             setTitle("Trang chủ giáo vụ");
-            setBounds(450, 190, 1014, 597);
+            setBounds(250, 150, 1014, 597);
             setResizable(false);
             contentPane = new JPanel();
             contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -44,13 +46,10 @@ public class AccountAcademicStaff extends JFrame {
             JLabel usernameLabel = new JLabel("Tài khoản");
             JLabel nameLabel = new JLabel("Họ và tên");
 
-            final JButton logoutButton = new JButton("Đăng xuất");
-            logoutButton.setForeground(new Color(0, 0, 0));
-            logoutButton.setBackground(UIManager.getColor("Button.disabledForeground"));
-            logoutButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
+            Button logoutButton = DefaultModel.getDefaultButton("Đăng xuất");
             logoutButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    int a = JOptionPane.showConfirmDialog(logoutButton, "Are you sure?");
+                    int a = JOptionPane.showConfirmDialog(null, "Are you sure?");
                     if (a == JOptionPane.YES_OPTION) {
                         dispose();
                         Login obj = new Login();
@@ -58,30 +57,39 @@ public class AccountAcademicStaff extends JFrame {
                     }
                 }
             });
-            logoutButton.setBounds(700, 500, 200, 50);
+            logoutButton.setBounds(700, 200, 200, 50);
             contentPane.add(logoutButton);
 
-            final JButton updateButton = new JButton("Cập nhật");
-            updateButton.setForeground(new Color(0, 0, 0));
-            updateButton.setBackground(UIManager.getColor("Button.disabledForeground"));
-            updateButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
-            updateButton.addActionListener(new ActionListener() {
+            Button backButton = DefaultModel.getDefaultButton("Quay lại");
+            backButton.setBounds(100,200,200,50);
+            backButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-//                    int a = JOptionPane.showConfirmDialog(logoutButton, "Are you sure?");
-//                    if (a == JOptionPane.YES_OPTION) {
-//                        dispose();
-//                        Login obj = new Login();
-//                        obj.setVisible(true);
-//                    }
+                    AcademicStaffHome academicStaffHome = new AcademicStaffHome(username);
+                    academicStaffHome.setVisible(true);
+                    dispose();
                 }
             });
-            updateButton.setBounds(100, 500, 200, 50);
-            contentPane.add(updateButton);
 
-            final JButton changePasswordButton = new JButton("Thay đổi mật khẩu");
-            changePasswordButton.setForeground(new Color(0, 0, 0));
-            changePasswordButton.setBackground(UIManager.getColor("Button.disabledForeground"));
-            changePasswordButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
+            contentPane.add(backButton);
+
+//            final JButton updateButton = new JButton("Cập nhật");
+//            updateButton.setForeground(new Color(0, 0, 0));
+//            updateButton.setBackground(UIManager.getColor("Button.disabledForeground"));
+//            updateButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
+//            updateButton.addActionListener(new ActionListener() {
+//                public void actionPerformed(ActionEvent e) {
+////                    int a = JOptionPane.showConfirmDialog(logoutButton, "Are you sure?");
+////                    if (a == JOptionPane.YES_OPTION) {
+////                        dispose();
+////                        Login obj = new Login();
+////                        obj.setVisible(true);
+////                    }
+//                }
+//            });
+//            updateButton.setBounds(100, 500, 200, 50);
+//            contentPane.add(updateButton);
+
+            Button changePasswordButton = DefaultModel.getDefaultButton("Thay đổi mật khẩu");
             changePasswordButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
                     AcademicStaffChangePassword academicStaffChangePassword = new AcademicStaffChangePassword(username);
@@ -89,7 +97,7 @@ public class AccountAcademicStaff extends JFrame {
                     dispose();
                 }
             });
-            changePasswordButton.setBounds(400, 500, 200, 50);
+            changePasswordButton.setBounds(400, 200, 200, 50);
             contentPane.add(changePasswordButton);
         }
     }
