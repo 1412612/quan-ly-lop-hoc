@@ -1,8 +1,7 @@
 package controller;
 
-import constant.DayOfWeekConstant;
-import demo.DateLabelFormatter;
-import demo.JHourMinuteChooser;
+import swingmodel.DateLabelFormatter;
+import swingmodel.JHourMinuteChooser;
 import model.Room;
 import model.Subject;
 import net.sourceforge.jdatepicker.impl.JDatePanelImpl;
@@ -10,7 +9,6 @@ import net.sourceforge.jdatepicker.impl.JDatePickerImpl;
 import net.sourceforge.jdatepicker.impl.UtilDateModel;
 import repository.SubjectRepository;
 import service.RoomService;
-import utils.DateToString;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -45,7 +43,7 @@ public class DetailSubject extends JFrame {
         subject = subjectRepository.getBySubjectId(subjectId);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Chi tiết môn học");
-        setBounds(450, 190, 1000, 600);
+        setBounds(250, 150, 1000, 600);
         setResizable(false);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

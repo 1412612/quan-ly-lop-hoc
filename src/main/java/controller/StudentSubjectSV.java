@@ -1,8 +1,8 @@
 package controller;
 
 
-import data.DataModel;
-import data.Table;
+import swingmodel.DataModel;
+import swingmodel.Table;
 import model.Room;
 import model.Student;
 import model.StudentSubject;
@@ -279,13 +279,13 @@ public class StudentSubjectSV extends JFrame {
         calendar.setTime(nowDate);
         calendar.get(Calendar.HOUR);
         calendar.get(Calendar.MINUTE);
-        if(!(startHour<=calendar.get(Calendar.HOUR) && endHour>=calendar.get(Calendar.HOUR))){
+        if(!(startHour<=calendar.get(Calendar.HOUR_OF_DAY) && endHour>=calendar.get(Calendar.HOUR_OF_DAY))){
             JOptionPane.showMessageDialog(null, "Không phải thời gian điểm danh môn học này!");
             return;
-        }if(startHour==calendar.get(Calendar.HOUR) && startM<=calendar.get(Calendar.MINUTE)){
+        }if(startHour==calendar.get(Calendar.HOUR_OF_DAY) && startM>=calendar.get(Calendar.MINUTE)){
             JOptionPane.showMessageDialog(null, "Không phải thời gian điểm danh môn học này!");
             return;
-        }if(endHour==calendar.get(Calendar.HOUR) && endM>=calendar.get(Calendar.MINUTE)){
+        }if(endHour==calendar.get(Calendar.HOUR_OF_DAY) && endM<=calendar.get(Calendar.MINUTE)){
             JOptionPane.showMessageDialog(null, "Không phải thời gian điểm danh môn học này!");
             return;
         }

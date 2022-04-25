@@ -14,8 +14,8 @@ public class ChangePasswordDefault extends JFrame {
 
     private static final long serialVersionUID = 1L;
     private JPanel contentPane;
-    private JTextField newPassword;
-    private JTextField confirmPassword;
+    private JPasswordField newPassword;
+    private JPasswordField confirmPassword;
     private StudentService studentService;
     private String mssv;
     private Student student;
@@ -24,7 +24,7 @@ public class ChangePasswordDefault extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    ChangePasswordDefault frame = new ChangePasswordDefault("SV0001");
+                    ChangePasswordDefault frame = new ChangePasswordDefault("SV7");
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -65,7 +65,7 @@ public class ChangePasswordDefault extends JFrame {
         lbNewPassword.setBounds(100, 170, 281, 52);
         contentPane.add(lbNewPassword);
 
-        newPassword = new JTextField();
+        newPassword = new JPasswordField();
         newPassword.setFont(new Font("Tahoma", Font.PLAIN, 26));
         newPassword.setBounds(481, 170, 281, 68);
         contentPane.add(newPassword);
@@ -78,11 +78,30 @@ public class ChangePasswordDefault extends JFrame {
         lblUsername.setBounds(100, 250, 281, 52);
         contentPane.add(lblUsername);
 
-        confirmPassword = new JTextField();
+        confirmPassword = new JPasswordField();
         confirmPassword.setFont(new Font("Tahoma", Font.PLAIN, 26));
         confirmPassword.setBounds(481, 250, 281, 68);
         contentPane.add(confirmPassword);
         confirmPassword.setColumns(10);
+
+        JCheckBox showPassword=new JCheckBox("Show Password");
+        showPassword.setBounds(481, 320, 300, 50);
+        showPassword.setFont(new Font("Tahoma", Font.PLAIN, 26));
+        contentPane.add(showPassword);
+        newPassword.setEchoChar('*');
+        confirmPassword.setEchoChar('*');
+        showPassword.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (showPassword.isSelected()) {
+                    newPassword.setEchoChar((char) 0);
+                    confirmPassword.setEchoChar((char) 0);
+                } else {
+                    newPassword.setEchoChar('*');
+                    confirmPassword.setEchoChar('*');
+                }
+            }
+        });
+
 
         JButton button = new JButton("Đổi mật khẩu\r\n");
         button.setBackground(UIManager.getColor("Button.disabledForeground"));
@@ -108,7 +127,7 @@ public class ChangePasswordDefault extends JFrame {
             }
         });
         button.setFont(new Font("Tahoma", Font.PLAIN, 26));
-        button.setBounds(247, 350, 300, 80);
+        button.setBounds(247, 450, 300, 50);
         contentPane.add(button);
     }
 }

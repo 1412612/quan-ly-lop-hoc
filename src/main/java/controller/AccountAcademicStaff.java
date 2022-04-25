@@ -1,6 +1,6 @@
 package controller;
 
-import data.DefaultModel;
+import swingmodel.DefaultModel;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -49,7 +49,7 @@ public class AccountAcademicStaff extends JFrame {
             Button logoutButton = DefaultModel.getDefaultButton("Đăng xuất");
             logoutButton.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
-                    int a = JOptionPane.showConfirmDialog(null, "Are you sure?");
+                    int a = JOptionPane.showConfirmDialog(null, "Bạn có muốn đăng xuất?");
                     if (a == JOptionPane.YES_OPTION) {
                         dispose();
                         Login obj = new Login();

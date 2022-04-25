@@ -1,14 +1,11 @@
 package controller;
 
 
-import data.DataAttendanceModel;
-import data.DataModel;
+import swingmodel.DataAttendanceModel;
 import model.AcademicStaff;
-import model.Room;
 import model.StudentSubject;
 import model.Subject;
 import org.apache.commons.lang3.ObjectUtils;
-import org.openxmlformats.schemas.wordprocessingml.x2006.main.STUnsignedDecimalNumber;
 import repository.StudentSubjectRepository;
 import repository.SubjectRepository;
 import service.AcademicStaffService;

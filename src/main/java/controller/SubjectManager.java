@@ -1,9 +1,8 @@
 package controller;
 
 
-import constant.DayOfWeekConstant;
-import data.DataModel;
-import data.Table;
+import swingmodel.DataModel;
+import swingmodel.Table;
 import model.AcademicStaff;
 import model.Room;
 import model.Subject;
@@ -51,7 +50,7 @@ public class SubjectManager extends JFrame {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Quản lý lớp học");
-        setBounds(450, 190, 1000, 600);
+        setBounds(250, 150, 1000, 600);
         setResizable(false);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

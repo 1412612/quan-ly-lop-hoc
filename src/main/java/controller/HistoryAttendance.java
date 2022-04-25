@@ -1,7 +1,7 @@
 package controller;
 
 
-import data.DataAttendanceModel;
+import swingmodel.DataAttendanceModel;
 import model.*;
 import model.StudentSubject;
 import org.apache.commons.lang3.ObjectUtils;

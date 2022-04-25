@@ -2,7 +2,7 @@
 package controller;
 
 
-import data.DataModel;
+import swingmodel.DataModel;
 import lombok.SneakyThrows;
 import model.AcademicStaff;
 import model.Student;
@@ -20,6 +20,7 @@ import service.AcademicStaffService;
 import service.StudentService;
 import service.StudentSubjectService;
 import utils.PasswordUtils;
+import utils.WriteExcel;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -190,7 +191,7 @@ public class StudentSubjectManager extends JFrame {
 //                AddListStudentSubject child = new AddListStudentSubject(username, id);
 //                child.setVisible(true);
 //                dispose();
-                JOptionPane.showMessageDialog(null,"Tải template xuống thành công!");
+                JOptionPane.showMessageDialog(null,"Tải template xuống thành công tại Desktop/template.xlsx!");
             }
         });
 

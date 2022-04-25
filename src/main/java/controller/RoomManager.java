@@ -1,7 +1,7 @@
 package controller;
 
 
-import data.DataModel;
+import swingmodel.DataModel;
 import model.AcademicStaff;
 import model.Room;
 import org.apache.commons.lang3.ObjectUtils;

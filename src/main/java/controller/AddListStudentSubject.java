@@ -2,7 +2,7 @@
 package controller;
 
 
-import data.DataModel;
+import swingmodel.DataModel;
 import model.AcademicStaff;
 import model.Student;
 import model.StudentSubject;

@@ -1,8 +1,7 @@
 package controller;
 
-import data.DefaultModel;
+import swingmodel.DefaultModel;
 import model.Student;
-import service.AcademicStaffService;
 import service.StudentService;
 import utils.PasswordUtils;
 
@@ -24,7 +23,7 @@ public class StudentChangePassword extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    StudentChangePassword frame = new StudentChangePassword("mssv1", 13);
+                    StudentChangePassword frame = new StudentChangePassword("SV7", 13);
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -54,7 +53,8 @@ public class StudentChangePassword extends JFrame {
         lbOldPassword.setBounds(100, 100, 281, 52);
         contentPane.add(lbOldPassword);
 
-        JTextField oldPassword = new JTextField();
+        JPasswordField oldPassword = new JPasswordField();
+        oldPassword.setEchoChar('*');
         oldPassword.setFont(new Font("Tahoma", Font.PLAIN, 26));
         oldPassword.setBounds(481, 100, 281, 68);
         contentPane.add(oldPassword);
@@ -67,7 +67,8 @@ public class StudentChangePassword extends JFrame {
         lbNewPassword.setBounds(100, 170, 281, 52);
         contentPane.add(lbNewPassword);
 
-        JTextField newPassword = new JTextField();
+        JPasswordField newPassword = new JPasswordField();
+        newPassword.setEchoChar('*');
         newPassword.setFont(new Font("Tahoma", Font.PLAIN, 26));
         newPassword.setBounds(481, 170, 281, 68);
         contentPane.add(newPassword);
@@ -80,11 +81,30 @@ public class StudentChangePassword extends JFrame {
         lblUsername.setBounds(100, 250, 281, 52);
         contentPane.add(lblUsername);
 
-        JTextField confirmPassword = new JTextField();
+        JPasswordField confirmPassword = new JPasswordField();
+        confirmPassword.setEchoChar('*');
         confirmPassword.setFont(new Font("Tahoma", Font.PLAIN, 26));
         confirmPassword.setBounds(481, 250, 281, 68);
         contentPane.add(confirmPassword);
         confirmPassword.setColumns(10);
+
+        JCheckBox showPassword=new JCheckBox("Show Password");
+        showPassword.setBounds(481, 320, 300, 50);
+        showPassword.setFont(new Font("Tahoma", Font.PLAIN, 26));
+        contentPane.add(showPassword);
+        showPassword.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (showPassword.isSelected()) {
+                    newPassword.setEchoChar((char) 0);
+                    confirmPassword.setEchoChar((char) 0);
+                    oldPassword.setEchoChar((char) 0);
+                } else {
+                    newPassword.setEchoChar('*');
+                    oldPassword.setEchoChar('*');
+                    confirmPassword.setEchoChar('*');
+                }
+            }
+        });
 
         Button button = DefaultModel.getDefaultButton("Đổi mật khẩu");
 
@@ -113,11 +133,11 @@ public class StudentChangePassword extends JFrame {
                 }
             }
         });
-        button.setBounds(500, 350, 200, 50);
+        button.setBounds(500, 400, 200, 50);
         contentPane.add(button);
 
         Button backButton = DefaultModel.getDefaultButton("Quay lại");
-        backButton.setBounds(100,350,200,50);
+        backButton.setBounds(100,400,200,50);
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 AccountStudent accountStudent = new AccountStudent(mssv, id);

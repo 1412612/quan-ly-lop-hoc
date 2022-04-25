@@ -75,6 +75,7 @@ public class Login extends JFrame {
         contentPane.add(textField);
         textField.setColumns(10);
         passwordField = new JPasswordField();
+        passwordField.setEchoChar('*');
         passwordField.setFont(new Font("Tahoma", Font.PLAIN, 32));
         passwordField.setBounds(481, 286, 281, 68);
         contentPane.add(passwordField);
@@ -92,7 +93,7 @@ public class Login extends JFrame {
         contentPane.add(lblPassword);
         btnNewButton = new JButton("Login");
         btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 26));
-        btnNewButton.setBounds(545, 420, 162, 73);
+        btnNewButton.setBounds(545, 480, 130, 50);
 
         radioStudent = new JRadioButton("Student", true);
         radioStaff = new JRadioButton("Academic Staff");
@@ -104,6 +105,20 @@ public class Login extends JFrame {
         bg.add(radioStaff);bg.add(radioStudent);
         contentPane.add(radioStudent);
         contentPane.add(radioStaff);
+
+        JCheckBox showPassword=new JCheckBox("Show Password");
+        showPassword.setBounds(500, 420, 300, 50);
+        showPassword.setFont(new Font("Tahoma", Font.PLAIN, 26));
+        contentPane.add(showPassword);
+        showPassword.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                if (showPassword.isSelected()) {
+                    passwordField.setEchoChar((char) 0);
+                } else {
+                    passwordField.setEchoChar('*');
+                }
+            }
+        });
 
 
         btnNewButton.addActionListener(new ActionListener() {

@@ -2,7 +2,7 @@
 package controller;
 
 
-import data.DataModel;
+import swingmodel.DataModel;
 import model.AcademicStaff;
 import model.Student;
 import model.StudentSubject;
@@ -62,7 +62,7 @@ public class AddStudentInExcel extends JFrame {
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setTitle("Quản lý lớp học");
-        setBounds(450, 190, 1000, 600);
+        setBounds(250, 150, 1000, 600);
         setResizable(false);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
