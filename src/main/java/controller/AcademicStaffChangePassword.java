@@ -107,7 +107,7 @@ public class AcademicStaffChangePassword extends JFrame {
             }
         });
 
-        Button button = DefaultModel.getDefaultButton("Đổi mật khẩu");
+        JButton button = DefaultModel.getDefaultButton("Đổi mật khẩu");
 
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -137,8 +137,8 @@ public class AcademicStaffChangePassword extends JFrame {
         button.setBounds(500, 400, 200, 50);
         contentPane.add(button);
 
-        Button backButton = DefaultModel.getDefaultButton("Quay lại");
-        backButton.setBounds(100,400,200,50);
+        JButton backButton = DefaultModel.getDefaultButton("Quay lại");
+        backButton.setBounds(120,400,200,50);
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 AcademicStaffHome academicStaffHome = new AcademicStaffHome(username);

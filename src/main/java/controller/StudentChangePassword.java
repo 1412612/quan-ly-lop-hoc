@@ -106,7 +106,7 @@ public class StudentChangePassword extends JFrame {
             }
         });
 
-        Button button = DefaultModel.getDefaultButton("Đổi mật khẩu");
+        JButton button = DefaultModel.getDefaultButton("Đổi mật khẩu");
 
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -136,7 +136,7 @@ public class StudentChangePassword extends JFrame {
         button.setBounds(500, 400, 200, 50);
         contentPane.add(button);
 
-        Button backButton = DefaultModel.getDefaultButton("Quay lại");
+        JButton backButton = DefaultModel.getDefaultButton("Quay lại");
         backButton.setBounds(100,400,200,50);
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

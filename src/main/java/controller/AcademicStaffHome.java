@@ -74,13 +74,13 @@ public class AcademicStaffHome extends JFrame {
         JPanel menuPanel = new JPanel();
         menuPanel.setBackground(Color.GRAY);
         menuPanel.setLayout(null);
-        menuPanel.setBounds(0, 0, 200, 600);
+        menuPanel.setBounds(0, 0, 250, 600);
         contentPane.add(menuPanel);
 
-        Button subjectManagementButton = new Button("Quản lý lớp học");
-        subjectManagementButton.setBounds(10, 10, 170, 50);
+        JButton subjectManagementButton = new JButton("Quản lý lớp học");
+        subjectManagementButton.setBounds(10, 10, 230, 50);
         subjectManagementButton.setForeground(new Color(0, 0, 0));
-        subjectManagementButton.setBackground(UIManager.getColor("Button.disabledForeground"));
+        subjectManagementButton.setBackground(new Color(240,240,240));
         subjectManagementButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
         subjectManagementButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -90,10 +90,10 @@ public class AcademicStaffHome extends JFrame {
             }
         });
 
-        Button studentManagementButton = new Button("Quản lý sinh viên");
-        studentManagementButton.setBounds(10, 110, 170, 50);
+        JButton studentManagementButton = new JButton("Quản lý sinh viên");
+        studentManagementButton.setBounds(10, 110, 230, 50);
         studentManagementButton.setForeground(new Color(0, 0, 0));
-        studentManagementButton.setBackground(UIManager.getColor("Button.disabledForeground"));
+        studentManagementButton.setBackground(new Color(240,240,240));
         studentManagementButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
         studentManagementButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -103,10 +103,10 @@ public class AcademicStaffHome extends JFrame {
             }
         });
 
-        Button roomManagementButton = new Button("Quản lý phòng học");
-        roomManagementButton.setBounds(10, 210, 170, 50);
+        JButton roomManagementButton = new JButton("Quản lý phòng học");
+        roomManagementButton.setBounds(10, 210, 230, 50);
         roomManagementButton.setForeground(new Color(0, 0, 0));
-        roomManagementButton.setBackground(UIManager.getColor("Button.disabledForeground"));
+        roomManagementButton.setBackground(new Color(240, 240, 240));
         roomManagementButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
         roomManagementButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -116,10 +116,10 @@ public class AcademicStaffHome extends JFrame {
             }
         });
 
-        Button accountManagementButton = new Button("Quản lý tài khoản");
-        accountManagementButton.setBounds(10, 310, 170, 50);
+        JButton accountManagementButton = new JButton("Quản lý tài khoản");
+        accountManagementButton.setBounds(10, 310, 230, 50);
         accountManagementButton.setForeground(new Color(0, 0, 0));
-        accountManagementButton.setBackground(UIManager.getColor("Button.disabledForeground"));
+        accountManagementButton.setBackground(new Color(240,240,240));
         accountManagementButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
         accountManagementButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

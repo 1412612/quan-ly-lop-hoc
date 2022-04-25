@@ -128,7 +128,7 @@ public class HistoryAttendance extends JFrame {
 //        contentPane.add(deleteButton);
 
 
-        Button backButton = new Button("Quay lại");
+        JButton backButton = new JButton("Quay lại");
         backButton.setBounds(50, 500, 100, 30);
         backButton.setForeground(new Color(255, 255, 255));
         backButton.setBackground(new Color(0, 128, 255));

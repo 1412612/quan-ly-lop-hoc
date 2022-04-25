@@ -79,7 +79,7 @@ public class SubjectManager extends JFrame {
 
         DataModel model = getDefaultTableModel(subjects);
         Table jt = new Table(model);
-        jt.setColumnWidths(30, 60,80,60,60, 150, 150,130,130);
+        jt.setColumnWidths(30, 60,80,60,60, 130, 130,150,150);
         jt.setRowHeight(20);
         jt.getTableHeader().setBackground(new Color(255, 128, 0));
         jt.getTableHeader().setForeground(Color.WHITE);
@@ -117,8 +117,8 @@ public class SubjectManager extends JFrame {
 //        contentPane.add(deleteButton);
 
 
-        Button backButton = new Button("Quay lại");
-        backButton.setBounds(50, 500, 100, 30);
+        JButton backButton = new JButton("Quay lại");
+        backButton.setBounds(50, 500, 120, 30);
         backButton.setForeground(new Color(255, 255, 255));
         backButton.setBackground(new Color(0, 128, 255));
         backButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -132,8 +132,8 @@ public class SubjectManager extends JFrame {
 
         contentPane.add(backButton);
 
-        Button addButton = new Button("Thêm mới");
-        addButton.setBounds(150 + 175, 500, 100, 30);
+        JButton addButton = new JButton("Thêm mới");
+        addButton.setBounds(150 + 175, 500, 140, 30);
         addButton.setForeground(new Color(255, 255, 255));
         addButton.setBackground(new Color(0, 128, 255));
         addButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -147,7 +147,7 @@ public class SubjectManager extends JFrame {
 
         contentPane.add(addButton);
 
-        Button detailButton = new Button("Chi tiết");
+        JButton detailButton = new JButton("Chi tiết");
         detailButton.setBounds(150 + 175+175 +100, 500, 100, 30);
         detailButton.setForeground(new Color(255, 255, 255));
         detailButton.setBackground(new Color(0, 128, 255));
@@ -184,14 +184,14 @@ public class SubjectManager extends JFrame {
 
     DataModel getDefaultTableModel(List<Subject> list) {
         if (ObjectUtils.isEmpty(list)) {
-            String columns[] = {"ID", "Mã lớp", "Tên lớp", "Phòng", "Thứ", "Thời gian bắt đầu", "Thời gian kết thúc" ,"Ngày bắt đầu", "Ngày kết thúc"};
+            String columns[] = {"ID", "Mã lớp", "Tên lớp", "Phòng", "Thứ","Ngày bắt đầu", "Ngày kết thúc", "Thời gian bắt đầu", "Thời gian kết thúc"};
 
             DataModel model = new DataModel(columns, 0);
             return model;
         }
         String data[][] = new String[list.size()][];
 
-        String columns[] = {"ID", "Mã lớp", "Tên lớp", "Phòng", "Thứ", "Thời gian bắt đầu", "Thời gian kết thúc" ,"Ngày bắt đầu", "Ngày kết thúc"};
+        String columns[] = {"ID", "Mã lớp", "Tên lớp", "Phòng", "Thứ","Ngày bắt đầu", "Ngày kết thúc",  "Thời gian bắt đầu", "Thời gian kết thúc"};
 
         DataModel model = new DataModel(columns, 0);
 

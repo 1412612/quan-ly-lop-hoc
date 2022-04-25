@@ -132,8 +132,8 @@ public class StudentSubjectManager extends JFrame {
         contentPane.add(deleteButton);
 
 
-        Button backButton = new Button("Quay lại");
-        backButton.setBounds(25, 500, 100, 30);
+        JButton backButton = new JButton("Quay lại");
+        backButton.setBounds(25, 500, 120, 30);
         backButton.setForeground(new Color(255, 255, 255));
         backButton.setBackground(new Color(0, 128, 255));
         backButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -147,8 +147,8 @@ public class StudentSubjectManager extends JFrame {
 
         contentPane.add(backButton);
 
-        Button addButton = new Button("Thêm mới");
-        addButton.setBounds(25+100+50, 500, 100, 30);
+        JButton addButton = new JButton("Thêm mới");
+        addButton.setBounds(25+100+50, 500, 140, 30);
         addButton.setForeground(new Color(255, 255, 255));
         addButton.setBackground(new Color(0, 128, 255));
         addButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -163,8 +163,8 @@ public class StudentSubjectManager extends JFrame {
         contentPane.add(addButton);
 
 
-        Button updateButton = new Button("Duyệt sinh viên");
-        updateButton.setBounds(25+100+50 + 100+50, 500, 150, 30);
+        JButton updateButton = new JButton("Duyệt sinh viên");
+        updateButton.setBounds(25+100+50 + 100+50, 500, 180, 30);
         updateButton.setForeground(new Color(255, 255, 255));
         updateButton.setBackground(new Color(0, 128, 255));
         updateButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -179,7 +179,7 @@ public class StudentSubjectManager extends JFrame {
         contentPane.add(updateButton);
 
 
-        Button templateButton = new Button("Tải template");
+        JButton templateButton = new JButton("Tải template");
         templateButton.setBounds(25+100+50 + 100+50 + 150+50, 500, 150, 30);
         templateButton.setForeground(new Color(255, 255, 255));
         templateButton.setBackground(new Color(0, 128, 255));
@@ -191,14 +191,14 @@ public class StudentSubjectManager extends JFrame {
 //                AddListStudentSubject child = new AddListStudentSubject(username, id);
 //                child.setVisible(true);
 //                dispose();
-                JOptionPane.showMessageDialog(null,"Tải template xuống thành công tại Desktop/template.xlsx!");
+                JOptionPane.showMessageDialog(null,"Tải template xuống thành công tại D:/template.xlsx!");
             }
         });
 
         contentPane.add(templateButton);
 
-        Button importButton = new Button("Tải lên DS");
-        importButton.setBounds(25+100+50 + 100+50 + 150+50 + 150 + 50, 500, 100, 30);
+        JButton importButton = new JButton("Tải lên DS");
+        importButton.setBounds(25+100+50 + 100+50 + 150+50 + 150 + 25, 500, 140, 30);
         importButton.setForeground(new Color(255, 255, 255));
         importButton.setBackground(new Color(0, 128, 255));
         importButton.setFont(new Font("Tahoma", Font.PLAIN, 20));

@@ -26,7 +26,7 @@ public class StudentHome extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    StudentHome frame = new StudentHome("mssv1");
+                    StudentHome frame = new StudentHome("SV7");
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -75,13 +75,13 @@ public class StudentHome extends JFrame {
         JPanel menuPanel = new JPanel();
         menuPanel.setBackground(Color.GRAY);
         menuPanel.setLayout(null);
-        menuPanel.setBounds(0, 0, 200, 600);
+        menuPanel.setBounds(0, 0, 250, 600);
         contentPane.add(menuPanel);
 
-        Button subjectManagementButton = new Button("Quản lý lớp học");
-        subjectManagementButton.setBounds(10, 10, 170, 50);
+        JButton subjectManagementButton = new JButton("Quản lý lớp học");
+        subjectManagementButton.setBounds(10, 10, 230, 50);
         subjectManagementButton.setForeground(new Color(0, 0, 0));
-        subjectManagementButton.setBackground(UIManager.getColor("Button.disabledForeground"));
+        subjectManagementButton.setBackground(new Color(240,240,240));
         subjectManagementButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
         subjectManagementButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -92,10 +92,10 @@ public class StudentHome extends JFrame {
         });
 
 
-        Button accountManagementButton = new Button("Quản lý tài khoản");
-        accountManagementButton.setBounds(10, 200, 170, 50);
+        JButton accountManagementButton = new JButton("Quản lý tài khoản");
+        accountManagementButton.setBounds(10, 200, 230, 50);
         accountManagementButton.setForeground(new Color(0, 0, 0));
-        accountManagementButton.setBackground(UIManager.getColor("Button.disabledForeground"));
+        accountManagementButton.setBackground(new Color(240,240,240));
         accountManagementButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
         accountManagementButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {

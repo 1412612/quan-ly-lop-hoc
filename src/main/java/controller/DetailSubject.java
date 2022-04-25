@@ -58,20 +58,6 @@ public class DetailSubject extends JFrame {
         headerLabel.setBounds(30, 30, 500, 50);
         contentPane.add(headerLabel);
 
-//        JLabel idLabel = new JLabel("ID");
-//        idLabel.setBackground(Color.BLACK);
-//        idLabel.setForeground(Color.BLACK);
-//        idLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
-//        idLabel.setBounds(30, 80, 200, 30);
-//        contentPane.add(idLabel);
-//
-//        JTextField idTextField = new JTextField();
-//        idTextField.setFont(new Font("Tahoma", Font.PLAIN, 20));
-//        idTextField.setBounds(250, 80, 200, 30);
-//        contentPane.add(idTextField);
-
-
-
         JLabel codeLabel = new JLabel("MÃ LỚP HỌC");
         codeLabel.setBackground(Color.BLACK);
         codeLabel.setForeground(Color.BLACK);
@@ -195,8 +181,8 @@ public class DetailSubject extends JFrame {
         contentPane.add(timeEndChooser);
 
 
-        Button backButton = new Button("Quay lại");
-        backButton.setBounds(50, 500, 100, 30);
+        JButton backButton = new JButton("Quay lại");
+        backButton.setBounds(50, 500, 120, 30);
         backButton.setForeground(new Color(255, 255, 255));
         backButton.setBackground(new Color(0, 128, 255));
         backButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -210,8 +196,8 @@ public class DetailSubject extends JFrame {
 
         contentPane.add(backButton);
 
-        Button addButton = new Button("Cập nhật");
-        addButton.setBounds(150 + 175, 500, 100, 30);
+        JButton addButton = new JButton("Cập nhật");
+        addButton.setBounds(150 + 175, 500, 120, 30);
         addButton.setForeground(new Color(255, 255, 255));
         addButton.setBackground(new Color(0, 128, 255));
         addButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -261,8 +247,8 @@ public class DetailSubject extends JFrame {
 
         contentPane.add(addButton);
 
-        Button qlsvButton = new Button("DS sinh viên");
-        qlsvButton.setBounds(150+175+100+175, 500, 150, 30);
+        JButton qlsvButton = new JButton("DS sinh viên");
+        qlsvButton.setBounds(150+175+120+125, 500, 150, 30);
         qlsvButton.setForeground(new Color(255, 255, 255));
         qlsvButton.setBackground(new Color(0, 128, 255));
         qlsvButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -276,8 +262,8 @@ public class DetailSubject extends JFrame {
 
         contentPane.add(qlsvButton);
 
-        Button ddButton = new Button("Điểm danh");
-        ddButton.setBounds(150+175+100+175 +100 +175, 500, 100, 30);
+        JButton ddButton = new JButton("Điểm danh");
+        ddButton.setBounds(150+175+120+175 +100 +100, 500, 140, 30);
         ddButton.setForeground(new Color(255, 255, 255));
         ddButton.setBackground(new Color(0, 128, 255));
         ddButton.setFont(new Font("Tahoma", Font.PLAIN, 20));

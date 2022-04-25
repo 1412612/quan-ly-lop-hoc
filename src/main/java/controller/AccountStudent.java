@@ -46,7 +46,7 @@ public class AccountStudent extends JFrame {
         JLabel usernameLabel = new JLabel("Tài khoản");
         JLabel nameLabel = new JLabel("Họ và tên");
 
-        Button logoutButton = DefaultModel.getDefaultButton("Đăng xuất");
+        JButton logoutButton = DefaultModel.getDefaultButton("Đăng xuất");
         logoutButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int a = JOptionPane.showConfirmDialog(null, "Bạn có muốn đăng xuất?");
@@ -60,7 +60,7 @@ public class AccountStudent extends JFrame {
         logoutButton.setBounds(700, 200, 200, 50);
         contentPane.add(logoutButton);
 
-        Button backButton = DefaultModel.getDefaultButton("Quay lại");
+        JButton backButton = DefaultModel.getDefaultButton("Quay lại");
         backButton.setBounds(100,200,200,50);
         backButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -89,7 +89,7 @@ public class AccountStudent extends JFrame {
 //            updateButton.setBounds(100, 500, 200, 50);
 //            contentPane.add(updateButton);
 
-        Button changePasswordButton = DefaultModel.getDefaultButton("Thay đổi mật khẩu");
+        JButton changePasswordButton = DefaultModel.getDefaultButton("Thay đổi mật khẩu");
         changePasswordButton.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 StudentChangePassword studentChangePassword = new StudentChangePassword(mssv,id);
