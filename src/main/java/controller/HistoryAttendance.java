@@ -129,7 +129,7 @@ public class HistoryAttendance extends JFrame {
 
 
         JButton backButton = new JButton("Quay lại");
-        backButton.setBounds(50, 500, 100, 30);
+        backButton.setBounds(50, 500, 140, 30);
         backButton.setForeground(new Color(255, 255, 255));
         backButton.setBackground(new Color(0, 128, 255));
         backButton.setFont(new Font("Tahoma", Font.PLAIN, 20));

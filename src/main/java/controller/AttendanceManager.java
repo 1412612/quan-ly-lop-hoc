@@ -124,7 +124,7 @@ public class AttendanceManager extends JFrame {
 
 
         JButton backButton = new JButton("Quay lại");
-        backButton.setBounds(50, 500, 100, 30);
+        backButton.setBounds(50, 500, 140, 30);
         backButton.setForeground(new Color(255, 255, 255));
         backButton.setBackground(new Color(0, 128, 255));
         backButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -170,7 +170,7 @@ public class AttendanceManager extends JFrame {
 
 
         JButton updateButton = new JButton("Cập nhật");
-        updateButton.setBounds(150 + 175 + 100 + 175, 500, 100, 30);
+        updateButton.setBounds(150 + 175 + 100 + 175, 500, 140, 30);
         updateButton.setForeground(new Color(255, 255, 255));
         updateButton.setBackground(new Color(0, 128, 255));
         updateButton.setFont(new Font("Tahoma", Font.PLAIN, 20));

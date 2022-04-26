@@ -50,7 +50,7 @@ public class AddSubject extends JFrame {
         contentPane.setLayout(null);
 
         //header
-        JLabel headerLabel = new JLabel("Thêm lớp học mới");
+        JLabel headerLabel = new JLabel("Thêm môn học mới");
         headerLabel.setBackground(Color.BLACK);
         headerLabel.setForeground(Color.BLACK);
         headerLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));
@@ -71,7 +71,7 @@ public class AddSubject extends JFrame {
 
 
 
-        JLabel codeLabel = new JLabel("MÃ LỚP HỌC");
+        JLabel codeLabel = new JLabel("MÃ môn học");
         codeLabel.setBackground(Color.BLACK);
         codeLabel.setForeground(Color.BLACK);
         codeLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -84,7 +84,7 @@ public class AddSubject extends JFrame {
         contentPane.add(codeTextField);
         codeTextField.setColumns(10);
 
-        JLabel nameLabel = new JLabel("TÊN LỚP HỌC");
+        JLabel nameLabel = new JLabel("TÊN môn học");
         nameLabel.setBackground(Color.BLACK);
         nameLabel.setForeground(Color.BLACK);
         nameLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
@@ -146,45 +146,45 @@ public class AddSubject extends JFrame {
         startDatePicker.setBounds(700, 130,200,30);
         contentPane.add(startDatePicker);
 
-        JLabel dateEndLabel = new JLabel("NGÀY KẾT THÚC");
-        dateEndLabel.setBackground(Color.BLACK);
-        dateEndLabel.setForeground(Color.BLACK);
-        dateEndLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        dateEndLabel.setBounds(500, 180, 200, 30);
-        contentPane.add(dateEndLabel);
-
-        JDatePickerImpl endDatePicker;
-        UtilDateModel endModel = new UtilDateModel();
-        Calendar endCalendar = Calendar.getInstance();
-        endModel.setDate(endCalendar.get(Calendar.YEAR), endCalendar.get(Calendar.MONTH), endCalendar.get(Calendar.DAY_OF_MONTH));
-        endModel.setSelected(true);
-        JDatePanelImpl endDatePanel = new JDatePanelImpl(endModel);
-        endDatePicker = new JDatePickerImpl(endDatePanel, new DateLabelFormatter());
-        endDatePicker.setBounds(700, 180,200,30);
-        contentPane.add(endDatePicker);
+//        JLabel dateEndLabel = new JLabel("NGÀY KẾT THÚC");
+//        dateEndLabel.setBackground(Color.BLACK);
+//        dateEndLabel.setForeground(Color.BLACK);
+//        dateEndLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
+//        dateEndLabel.setBounds(500, 180, 200, 30);
+//        contentPane.add(dateEndLabel);
+//
+//        JDatePickerImpl endDatePicker;
+//        UtilDateModel endModel = new UtilDateModel();
+//        Calendar endCalendar = Calendar.getInstance();
+//        endModel.setDate(endCalendar.get(Calendar.YEAR), endCalendar.get(Calendar.MONTH), endCalendar.get(Calendar.DAY_OF_MONTH));
+//        endModel.setSelected(true);
+//        JDatePanelImpl endDatePanel = new JDatePanelImpl(endModel);
+//        endDatePicker = new JDatePickerImpl(endDatePanel, new DateLabelFormatter());
+//        endDatePicker.setBounds(700, 180,200,30);
+//        contentPane.add(endDatePicker);
 
         JLabel timeStartLabel = new JLabel("THỜI GIAN BẮT ĐẦU");
         timeStartLabel.setBackground(Color.BLACK);
         timeStartLabel.setForeground(Color.BLACK);
         timeStartLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        timeStartLabel.setBounds(500, 230, 200, 30);
+        timeStartLabel.setBounds(500, 180, 200, 30);
         contentPane.add(timeStartLabel);
 
         JHourMinuteChooser timeStartChooser = new JHourMinuteChooser(0, 0);
         timeStartChooser.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        timeStartChooser.setBounds(700, 230, 200, 30);
+        timeStartChooser.setBounds(700, 180, 200, 30);
         contentPane.add(timeStartChooser);
 
         JLabel timeEndLabel = new JLabel("THỜI GIAN KẾT THÚC");
         timeEndLabel.setBackground(Color.BLACK);
         timeEndLabel.setForeground(Color.BLACK);
         timeEndLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        timeEndLabel.setBounds(500, 280, 200, 30);
+        timeEndLabel.setBounds(500, 230, 200, 30);
         contentPane.add(timeEndLabel);
 
         JHourMinuteChooser timeEndChooser = new JHourMinuteChooser(0, 0);
         timeEndChooser.setFont(new Font("Tahoma", Font.PLAIN, 20));
-        timeEndChooser.setBounds(700, 280, 200, 30);
+        timeEndChooser.setBounds(700, 230, 200, 30);
         contentPane.add(timeEndChooser);
 
 
@@ -212,12 +212,12 @@ public class AddSubject extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 String codeSubject = codeTextField.getText();
                 if(codeSubject.equals("")){
-                    JOptionPane.showMessageDialog(null, "Mã lớp học không được trống!");
+                    JOptionPane.showMessageDialog(null, "Mã môn học không được trống!");
                     return;
                 }
                 String nameSubject = nameTextField.getText();
                 if(nameSubject.equals("")){
-                    JOptionPane.showMessageDialog(null, "Tên lớp học không được trống!");
+                    JOptionPane.showMessageDialog(null, "Tên môn học không được trống!");
                     return;
                 }
                 String dayOfWeekSubject = (String)dayOfWeekJCB.getSelectedItem();
@@ -232,7 +232,10 @@ public class AddSubject extends JFrame {
                     return;
                 }
                 Date dateStart = (Date) startDatePicker.getModel().getValue();
-                Date dateEnd = (Date) endDatePicker.getModel().getValue();
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(dateStart);
+                calendar.add(Calendar.WEEK_OF_YEAR, 15);
+                Date dateEnd = calendar.getTime();//(Date) endDatePicker.getModel().getValue();
                 String timeStart = timeStartChooser.getTime();
                 String timeEnd = timeEndChooser.getTime();
                 Subject subject = new Subject()
@@ -245,7 +248,7 @@ public class AddSubject extends JFrame {
                         .setTimeStart(timeStart)
                         .setTimeEnd(timeEnd);
                 subjectRepository.save(subject);
-                JOptionPane.showMessageDialog(null, "Thêm lớp học thành công!");
+                JOptionPane.showMessageDialog(null, "Thêm môn học thành công!");
                 SubjectManager subjectManager = new SubjectManager(username);
                 subjectManager.setVisible(true);
                 dispose();

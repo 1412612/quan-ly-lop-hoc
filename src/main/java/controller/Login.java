@@ -162,10 +162,10 @@ public class Login extends JFrame {
                     AcademicStaffHome ah = new AcademicStaffHome(userName);
                     ah.setTitle("Chao mung");
                     ah.setVisible(true);
-                    JOptionPane.showMessageDialog(btnNewButton, "Ban da dang nhap thanh cong");
+                    JOptionPane.showMessageDialog(null, "Ban da dang nhap thanh cong");
                 }
                 else {
-                    JOptionPane.showMessageDialog(btnNewButton, "User hoac password sai!");
+                    JOptionPane.showMessageDialog(null, "User hoac password sai!");
                 }
             }
         });

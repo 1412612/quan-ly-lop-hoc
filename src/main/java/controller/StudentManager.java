@@ -96,7 +96,7 @@ public class StudentManager extends JFrame {
             public void actionPerformed(ActionEvent ae) {
                 // check for selected row first
                 if (jt.getSelectedRow() != -1) {
-                    int a = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn xóa phòng học này?");
+                    int a = JOptionPane.showConfirmDialog(null, "Bạn có chắc chắn muốn sinh viên này?");
                     if (a == JOptionPane.YES_OPTION) {
                         Student entity = new Student()
                                 .setId(Integer.valueOf(String.valueOf(jt.getValueAt(jt.getSelectedRow(), 0))))
@@ -105,7 +105,7 @@ public class StudentManager extends JFrame {
 
                         boolean b = studentService.delete(entity);
                         if(!b) {
-                            JOptionPane.showMessageDialog(null, "Không thể xóa sinh viên do sinh viên thuộc một số lớp học!");
+                            JOptionPane.showMessageDialog(null, "Không thể xóa sinh viên do sinh viên thuộc một số môn học!");
                             return;
                         }
                         model.removeRow(jt.getSelectedRow());

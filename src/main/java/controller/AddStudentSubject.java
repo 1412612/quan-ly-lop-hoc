@@ -48,7 +48,7 @@ public class AddStudentSubject extends JFrame {
         contentPane.setLayout(null);
 
         //header
-        JLabel headerLabel = new JLabel("Thêm sinh viên mới vào lớp học");
+        JLabel headerLabel = new JLabel("Thêm sinh viên mới vào môn học");
         headerLabel.setBackground(Color.BLACK);
         headerLabel.setForeground(Color.BLACK);
         headerLabel.setFont(new Font("Tahoma", Font.PLAIN, 30));

@@ -61,7 +61,7 @@ public class AddStudentInExcel extends JFrame {
         academicStaff = academicStaffService.getByUsername(username);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setTitle("Quản lý lớp học");
+        setTitle("Quản lý môn học");
         setBounds(250, 150, 1000, 600);
         setResizable(false);
         contentPane = new JPanel();

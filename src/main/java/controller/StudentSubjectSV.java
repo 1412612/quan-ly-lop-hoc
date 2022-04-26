@@ -55,7 +55,7 @@ public class StudentSubjectSV extends JFrame {
         student = studentService.getByMssv(mssv);
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setTitle("Quản lý lớp học");
+        setTitle("Quản lý môn học");
         setBounds(250, 150, 1000, 600);
         setResizable(false);
         contentPane = new JPanel();
@@ -68,14 +68,14 @@ public class StudentSubjectSV extends JFrame {
 //        if (ObjectUtils.isNotEmpty(roomList))
 //            lastRoomId = roomList.get(roomList.size() - 1).getId();
 
-        JLabel headerLabel = new JLabel("Quản lý lớp học:");
+        JLabel headerLabel = new JLabel("Quản lý môn học:");
         headerLabel.setBackground(Color.BLACK);
         headerLabel.setForeground(Color.BLACK);
         headerLabel.setFont(new Font("Tahoma", Font.PLAIN, 25));
         headerLabel.setBounds(100, 0, 800, 50);
         contentPane.add(headerLabel);
 
-        JLabel contentLabel = new JLabel("Danh sách lớp học");
+        JLabel contentLabel = new JLabel("Danh sách môn học");
         contentLabel.setBackground(Color.BLACK);
         contentLabel.setForeground(Color.BLACK);
         contentLabel.setFont(new Font("Tahoma", Font.PLAIN, 20));

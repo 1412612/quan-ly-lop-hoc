@@ -78,7 +78,7 @@ public class StudentHome extends JFrame {
         menuPanel.setBounds(0, 0, 250, 600);
         contentPane.add(menuPanel);
 
-        JButton subjectManagementButton = new JButton("Quản lý lớp học");
+        JButton subjectManagementButton = new JButton("Quản lý môn học");
         subjectManagementButton.setBounds(10, 10, 230, 50);
         subjectManagementButton.setForeground(new Color(0, 0, 0));
         subjectManagementButton.setBackground(new Color(240,240,240));
