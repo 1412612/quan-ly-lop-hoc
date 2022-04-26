@@ -97,7 +97,7 @@ public class AddStudentSubject extends JFrame {
         contentPane.add(backButton);
 
         JButton addButton = new JButton("Thêm mới");
-        addButton.setBounds(150 + 175, 500, 120, 30);
+        addButton.setBounds(150 + 175, 500, 140, 30);
         addButton.setForeground(new Color(255, 255, 255));
         addButton.setBackground(new Color(0, 128, 255));
         addButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
